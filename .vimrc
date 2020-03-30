@@ -26,6 +26,8 @@ set incsearch
 set visualbell
 set laststatus=2
 
+nnoremap :tn :tabnew<CR>
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 set nocompatible              " be iMproved, required
