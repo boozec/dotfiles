@@ -15,6 +15,12 @@ augroup remember_folds
   autocmd BufWinEnter * silent! loadview
 augroup END
 
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 20
+
 set ai
 set autoread
 set encoding=utf-8
@@ -28,6 +34,7 @@ set laststatus=2
 set cursorline
 
 nnoremap tn :tabnew<CR>
+nnoremap ve :Vexplore<CR>
 
 call vundle#end()            " required
 filetype plugin indent on    " required
