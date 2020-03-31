@@ -25,8 +25,9 @@ set hlsearch
 set incsearch
 set visualbell
 set laststatus=2
+set cursorline
 
-nnoremap :tn :tabnew<CR>
+nnoremap tn :tabnew<CR>
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -35,6 +36,6 @@ filetype off                  " required
 
 syntax on
 
-colorscheme gruvbox-hard
-"colorscheme synthwave
+colorscheme miramare
+"colorscheme gruvbox-hard
 set showcmd
