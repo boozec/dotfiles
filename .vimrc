@@ -8,6 +8,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'rust-lang/rust.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'itchyny/lightline.vim'
 
 augroup remember_folds
   autocmd!
@@ -32,6 +33,9 @@ set incsearch
 set visualbell
 set laststatus=2
 set cursorline
+set ruler
+set list
+set listchars=eol:⏎,tab:»·,trail:ˑ,nbsp:⎵
 
 nnoremap tn :tabnew<CR>
 nnoremap ve :Vexplore<CR>
