@@ -1,5 +1,6 @@
 autocmd! bufwritepost .vimrc source %
 
+set term=screen-256color
 set clipboard=unnamed
 set mouse=a " click with mouse
 
@@ -30,6 +31,10 @@ set list " spaces as characters
 set listchars=eol:⏎,tab:»·,trail:ˑ,nbsp:⎵
 
 set foldmethod=indent
+
+set splitright " split on right side
+set lazyredraw
+set ttyfast
 
 syntax on
 
@@ -68,6 +73,7 @@ Plugin 'vim-airline/vim-airline' " airline at bottom with insert, name, line etc
 Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plugin 'junegunn/fzf.vim' " fuzzy finder
 Plugin 'luochen1990/rainbow' " color parentheses
 Plugin 'dense-analysis/ale' " checker syntax
+Plugin 'leafOfTree/vim-vue-plugin'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
