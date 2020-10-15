@@ -36,9 +36,6 @@ set splitright " split on right side
 set lazyredraw
 set ttyfast
 
-syntax on
-
-colorscheme miramare
 "colorscheme gruvbox-hard
 
 augroup remember_folds
@@ -60,9 +57,19 @@ nnoremap ff :Files .<CR>
 nnoremap co :Commits<CR>
 nnoremap gf :GFiles<CR>
 nnoremap gs :GFiles?<CR>
+nnoremap sp :set paste<CR>
+nnoremap snp :set nopaste<CR>
+
 let g:fzf_preview_window = 'right:70%'
 let g:ale_fix_on_save = 1
 
+filetype plugin indent on
+set nocompatible
+
+set showcmd " show commands at bottom
+syntax on
+
+colorscheme miramare
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -74,10 +81,6 @@ Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plugin 'june
 Plugin 'luochen1990/rainbow' " color parentheses
 Plugin 'dense-analysis/ale' " checker syntax
 Plugin 'leafOfTree/vim-vue-plugin'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()            " required
-filetype plugin indent on    " required
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-set showcmd " show commands at bottom
