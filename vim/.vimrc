@@ -1,5 +1,22 @@
 autocmd! bufwritepost .vimrc source %
 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'rust-lang/rust.vim' 
+Plugin 'airblade/vim-gitgutter' " display git status of the file
+Plugin 'vim-airline/vim-airline' " airline at bottom with insert, name, line etc.
+Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plugin 'junegunn/fzf.vim' " fuzzy finder
+Plugin 'luochen1990/rainbow' " color parentheses
+Plugin 'dense-analysis/ale' " checker syntax
+Plugin 'leafOfTree/vim-vue-plugin'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'junegunn/goyo.vim' " ignore numbers and center text
+Plugin 'tpope/vim-fugitive' " git extension for commit logs and etc.
+
+call vundle#end()            " required
+
 set term=screen-256color
 set clipboard=unnamed
 set mouse=a " click with mouse
@@ -36,30 +53,6 @@ set splitright " split on right side
 set lazyredraw
 set ttyfast
 
-"colorscheme gruvbox-hard
-
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
-
-nnoremap tn :tabnew<CR>
-nnoremap ve :Vexplore<CR>
-nnoremap :rt :RainbowToggle<CR>
-
-" mapping fzf commands
-" ff = open files explorer
-" co = open commits explorer
-" gf = open git ls-files
-" gs = open git status
-nnoremap ff :Files .<CR>
-nnoremap co :Commits<CR>
-nnoremap gf :GFiles<CR>
-nnoremap gs :GFiles?<CR>
-nnoremap sp :set paste<CR>
-nnoremap snp :set nopaste<CR>
-
 let g:fzf_preview_window = 'right:70%'
 let g:ale_fix_on_save = 1
 
@@ -70,17 +63,48 @@ set showcmd " show commands at bottom
 syntax on
 
 colorscheme miramare
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'rust-lang/rust.vim' 
-Plugin 'airblade/vim-gitgutter' " display git status of the file
-Plugin 'vim-airline/vim-airline' " airline at bottom with insert, name, line etc.
-Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plugin 'junegunn/fzf.vim' " fuzzy finder
-Plugin 'luochen1990/rainbow' " color parentheses
-Plugin 'dense-analysis/ale' " checker syntax
-Plugin 'leafOfTree/vim-vue-plugin'
-Plugin 'terryma/vim-multiple-cursors'
 
-call vundle#end()            " required
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+
+" ------------
+" MAPS
+" -----------
+nnoremap tn :tabnew<CR>
+nnoremap ve :Vexplore<CR>
+nnoremap :rt :RainbowToggle
+
+" buffers
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
+nnoremap ,b :Buffers<CR>
+
+" tabs
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
+nnoremap ,t :tabs<CR>
+
+" only one window
+nnoremap ,o :only<CR>
+
+
+" mapping fzf commands
+" ff = open files explorer
+" co = open commits explorer
+" gf = open git ls-files
+" gs = open git status
+nnoremap :ff :Files .<CR>
+nnoremap :co :Commits<CR>
+nnoremap :gf :GFiles<CR>
+nnoremap :gs :GFiles?<CR>
+nnoremap :gd :Git diff<CR>
+
+nnoremap :sp :set paste<CR>
+nnoremap :snp :set nopaste<CR>
+
+nnoremap :go :Goyo<CR>
+nnoremap :!go :Goyo!<CR>
