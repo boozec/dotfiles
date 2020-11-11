@@ -103,8 +103,8 @@ nnoremap :gf :GFiles<CR>
 nnoremap :gs :GFiles?<CR>
 nnoremap :gd :Git diff<CR>
 
-nnoremap :sp :set paste<CR>
-nnoremap :snp :set nopaste<CR>
+nnoremap :pa :set paste<CR>
+nnoremap :npa :set nopaste<CR>
 
 nnoremap :go :Goyo<CR>
 nnoremap :!go :Goyo!<CR>
