@@ -41,7 +41,7 @@ set history=1000
 set wildignore+=*.pyc
 
 set hlsearch " highlight search
-set incsearch " highlight search while type
+set incsearch
 
 set nowritebackup
 set laststatus=2
