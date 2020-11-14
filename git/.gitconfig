@@ -1,0 +1,34 @@
+[user]
+	name = Santo Cariotti
+	email = santo@dcariotti.me
+[alias]
+	ci = commit
+	co = checkout
+	logs =  log --graph --branches --remotes --tags --pretty=format':%C(yellow)%h%C(green)%d%Creset %s %C(yellow)|%Creset %C(cyan)%an <%ae> %C(yellow)| %C(white)%aD %C(red)(%ar)%Creset'
+	s = status
+	fd = "!f() { git l --grep=$1; }; f"
+	amend = commit --amend
+[credential]
+	helper = store
+[core]
+	editor = vim
+	pager = delta
+[init]
+	defaultBranch = main
+[grep]
+	lineNumber = true
+[color "grep"]
+	lineNumber = yellow
+	match = red bold
+	filename = cyan
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	features = side-by-side line-numbers decorations
+[pull]
+	rebase = false
