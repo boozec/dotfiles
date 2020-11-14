@@ -7,6 +7,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'rust-lang/rust.vim' 
 Plugin 'airblade/vim-gitgutter' " display git status of the file
 Plugin 'vim-airline/vim-airline' " airline at bottom with insert, name, line etc.
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plugin 'junegunn/fzf.vim' " fuzzy finder
 Plugin 'luochen1990/rainbow' " color parentheses
 Plugin 'dense-analysis/ale' " checker syntax
@@ -14,6 +15,7 @@ Plugin 'leafOfTree/vim-vue-plugin'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'junegunn/goyo.vim' " ignore numbers and center text
 Plugin 'tpope/vim-fugitive' " git extension for commit logs and etc.
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 call vundle#end()            " required
 
@@ -108,3 +110,7 @@ nnoremap :npa :set nopaste<CR>
 
 nnoremap :go :Goyo<CR>
 nnoremap :!go :Goyo!<CR>
+
+
+nmap <silent> de <Plug>(coc-definition)
+let g:airline_theme='onedark'
