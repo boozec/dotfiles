@@ -88,7 +88,7 @@ nnoremap k gk
 
 nnoremap tn :tabnew<CR>
 nnoremap ve :Vexplore<CR>
-cnoremap rt RainbowToggle<CR>
+nnoremap rt :RainbowToggle<CR>
 
 " buffers
 nnoremap ]b :bnext<CR>
@@ -109,11 +109,11 @@ nnoremap ,o :only<CR>
 " co = open commits explorer
 " gf = open git ls-files
 " gs = open git status
-cnoremap ff Files .<CR>
-cnoremap co Commits<CR>
-cnoremap gf GFiles<CR>
-cnoremap gs GFiles?<CR>
-cnoremap gd Git diff<CR>
+nnoremap :ff :Files .<CR>
+nnoremap :co :Commits<CR>
+nnoremap :gf :GFiles<CR>
+nnoremap :gs :GFiles?<CR>
+nnoremap :gd :Git diff<CR>
 
 nnoremap :pa :set paste<CR>
 nnoremap :npa :set nopaste<CR>
