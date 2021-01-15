@@ -1,12 +1,13 @@
 [user]
 	name = Santo Cariotti
 	email = santo@dcariotti.me
+	signingkey = C9B7C8FD3701C2C6
 [alias]
 	ci = commit
 	co = checkout
 	logs =  log --graph --branches --remotes --tags --pretty=format':%C(yellow)%h%C(green)%d%Creset %s %C(yellow)|%Creset %C(cyan)%an <%ae> %C(yellow)| %C(white)%aD %C(red)(%ar)%Creset'
 	st = status
-	fd = "!f() { git l --grep=$1; }; f"
+	fd = "!f() { git log --grep=$1; }; f"
 	amend = commit --amend
 [credential]
 	helper = store
