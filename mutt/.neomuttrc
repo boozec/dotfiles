@@ -1,0 +1,86 @@
+set realname = "Santo Cariotti"
+set from = "<email>"
+set use_from = yes
+set envelope_from = yes
+
+set smtp_url = "smtp://<email>@<host>:<port>/"
+set smtp_pass = "<pass>"
+
+set imap_user = "<email>"
+set imap_pass = "<pass>"
+
+set folder = "~/.mail/<email>"
+
+set ssl_force_tls = yes
+set sendmail = "msmtp -a <email>"
+set mbox_type = Maildir
+set spoolfile = +INBOX
+set record = +Sent
+set postponed = +Drafts
+set trash = +Trash
+mailboxes =INBOX =Sent =Drafts =Trash
+
+set editor = "vim"
+set charset = "utf-8"
+
+set sidebar_visible
+set sidebar_format="%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+
+
+# cache settings
+set header_cache = ~/.cache/mutt
+set message_cachedir = "~/.cache/mutt/message_cache"
+
+
+# navigation settings
+bind index,pager g noop
+macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
+macro index,pager gs "<change-folder>=Sent<enter>" "go to record"
+macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
+macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+
+set sidebar_visible = yes
+set sidebar_width = 30
+set sidebar_new_mail_only = no
+set sidebar_folder_indent
+set sidebar_indent_string = ' '
+
+bind index,pager K sidebar-prev
+bind index,pager J sidebar-next
+bind index,pager L sidebar-open
+bind index,pager B sidebar-toggle-visible
+
+# synchronization settings ['s' to sync]
+macro index S "<shell-escape>mbsync -V <email><enter>" "sync email"
+
+bind pager j next-line
+bind pager k previous-line
+bind pager h previous-entry
+bind pager l next-entry
+
+bind pager gg top
+bind pager G bottom
+bind index gg first-entry
+bind index G last-entry
+
+bind index,pager V noop
+macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
+
+bind generic,index,pager / search
+
+## Other Settings
+set mail_check_stats
+set sort = 'reverse-date'
+set markers = no # Disables the `+` displayed at line wraps
+set mime_forward = yes # attachments are forwarded with mail
+set fast_reply # skip to compose when replying
+set fcc_attach # save attachments with the body
+set forward_format = "Fwd: %s" # format of subject when forwarding
+
+set mailcap_path = ~/.neomutt/mailcap
+
+color indicator black yellow
+
+source ~/.neomutt/colors.muttrc
+
