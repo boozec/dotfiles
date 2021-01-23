@@ -1,0 +1,23 @@
+IMAPStore santo@dcariotti.me-remote
+# Address to connect to
+Host <host>
+Port <port>
+User <emil>
+Pass <password>
+SSLType STARTTLS 
+AuthMechs LOGIN
+
+MaildirStore <email>-local
+Subfolders Verbatim
+Path ~/.mail/<email>/
+INBOX ~/.mail/<email>/INBOX
+Flatten .
+
+Channel <email>
+Master :<email>-remote:
+Slave :<email>-local:
+Patterns INBOX Drafts Sent Trash
+SyncState *
+Create Both
+Expunge Both
+MaxMessages 0
