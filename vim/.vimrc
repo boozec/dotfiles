@@ -11,11 +11,13 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plugin 'junegunn/fzf.vim' " fuzzy finder
 Plugin 'luochen1990/rainbow' " color parentheses
 Plugin 'dense-analysis/ale' " checker syntax
-Plugin 'leafOfTree/vim-vue-plugin'
+Plugin 'posva/vim-vue'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-fugitive' " git extension for commit logs and etc.
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ap/vim-css-color'
+Plugin 'Yggdroot/indentLine'
 
 call vundle#end()            " required
 
@@ -63,7 +65,14 @@ set lazyredraw
 set ttyfast
 
 let g:fzf_preview_window = 'right:70%'
+
 let g:ale_fix_on_save = 1
+
+let g:airline_theme='onedark'
+
+let g:indentLine_char = '¦'
+
+let g:vue_pre_processors = ['pug', 'scss']
 
 filetype plugin indent on
 set nocompatible
@@ -119,4 +128,3 @@ nnoremap :pa :set paste<CR>
 nnoremap :npa :set nopaste<CR>
 
 nmap <F2> <Plug>(coc-definition)
-let g:airline_theme='onedark'
