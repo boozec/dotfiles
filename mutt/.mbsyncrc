@@ -1,4 +1,8 @@
-IMAPStore santo@dcariotti.me-remote
+# ================== #
+# <first_email>      #
+# ================== #
+
+IMAPStore <email>-remote
 # Address to connect to
 Host <host>
 Port <port>

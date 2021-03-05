@@ -1,24 +1,11 @@
-set realname = "Santo Cariotti"
-set from = "<email>"
-set use_from = yes
-set envelope_from = yes
+# Folder hooks
+folder-hook '<fisrt_email>' 'source ~/.neomutt/<fisrt_email>'
 
-set smtp_url = "smtp://<email>@<host>:<port>/"
-set smtp_pass = "<pass>"
+# Default account
+source ~/.neomutt/<fisrt_email>
 
-set imap_user = "<email>"
-set imap_pass = "<pass>"
-
-set folder = "~/.mail/<email>"
-
-set ssl_force_tls = yes
-set sendmail = "msmtp -a <email>"
-set mbox_type = Maildir
-set spoolfile = +INBOX
-set record = +Sent
-set postponed = +Drafts
-set trash = +Trash
-mailboxes =INBOX =Sent =Drafts =Trash
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.neomutt/<fisrt_email><enter><change-folder>!<enter>'
 
 set editor = "vim"
 set charset = "utf-8"
@@ -51,8 +38,9 @@ bind index,pager J sidebar-next
 bind index,pager L sidebar-open
 bind index,pager B sidebar-toggle-visible
 
-# synchronization settings ['s' to sync]
-macro index S "<shell-escape>mbsync -V <email><enter>" "sync email"
+source ~/.neomutt/colors.muttrc
+bind index j next-entry
+bind index k previous-entry
 
 bind pager j next-line
 bind pager k previous-line
@@ -79,8 +67,3 @@ set fcc_attach # save attachments with the body
 set forward_format = "Fwd: %s" # format of subject when forwarding
 
 set mailcap_path = ~/.neomutt/mailcap
-
-color indicator black yellow
-
-source ~/.neomutt/colors.muttrc
-

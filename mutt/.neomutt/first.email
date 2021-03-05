@@ -1,0 +1,26 @@
+set realname = "Santo Cariotti"
+set from = "<email>"
+set use_from = yes
+set envelope_from = yes
+
+set smtp_url = "smtp://<email>@<host>:<port>/"
+set smtp_pass = "<password>"
+
+set imap_user = "<email>"
+set imap_pass = "<password>"
+
+set folder = "~/.mail/<email>"
+
+set ssl_force_tls = yes
+set sendmail = "msmtp -a <email>"
+set mbox_type = Maildir
+set spoolfile = +INBOX
+set record = +Sent
+set postponed = +Drafts
+set trash = +Trash
+mailboxes =INBOX =Sent =Drafts =Trash
+
+# synchronization settings ['S' to sync]
+macro index S "<shell-escape>mbsync -V <email><enter>" "sync email"
+
+color indicator black color214
