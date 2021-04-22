@@ -19,6 +19,8 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ap/vim-css-color'
 Plugin 'Yggdroot/indentLine'
 
+Plugin 'ryanoasis/vim-devicons'
+
 call vundle#end()            " required
 
 set term=screen-256color
@@ -43,7 +45,7 @@ set expandtab " convert tabs in spaces
 set ai " auto indent
 set autoread
 
-set encoding=utf-8
+set encoding=UTF-8
 set history=1000
 set wildignore+=*.pyc
 
@@ -69,10 +71,13 @@ let g:fzf_preview_window = 'right:70%'
 let g:ale_fix_on_save = 1
 
 let g:airline_theme='onedark'
+let g:airline_powerline_fonts = 1
 
 let g:indentLine_char = '¦'
 
 let g:vue_pre_processors = ['pug', 'scss']
+
+let g:netrw_liststyle=1
 
 filetype plugin indent on
 set nocompatible
@@ -128,3 +133,5 @@ nnoremap :pa :set paste<CR>
 nnoremap :npa :set nopaste<CR>
 
 nmap <F2> <Plug>(coc-definition)
+nmap :cr :!command cargo r<CR>
+nmap <F6> :EditorConfigReload<CR>
