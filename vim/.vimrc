@@ -20,6 +20,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'Yggdroot/indentLine'
 
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'edkolev/tmuxline.vim'
 
 call vundle#end()            " required
 
@@ -66,9 +67,22 @@ set splitright " split on right side
 set lazyredraw
 set ttyfast
 
+" rust
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+let g:rust_clip_command = 'xclip -selection clipboard'
+
 let g:fzf_preview_window = 'right:70%'
 
 let g:ale_fix_on_save = 1
+let g:ale_sign_error = '🛑'
+let g:ale_sign_warning = '⚠️'
+let g:ale_sign_info = '💭'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%severity%] [%linter%] %s'
+
 
 let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
@@ -101,8 +115,8 @@ nnoremap j gj
 nnoremap k gk
 
 nnoremap tn :tabnew<CR>
-nnoremap ve :Vexplore<CR>
-nnoremap rt :RainbowToggle<CR>
+nnoremap :ve :Vexplore<CR>
+nnoremap :rt :RainbowToggle<CR>
 
 " buffers
 nnoremap ]b :bnext<CR>
@@ -132,6 +146,15 @@ nnoremap :gd :Git diff<CR>
 nnoremap :pa :set paste<CR>
 nnoremap :npa :set nopaste<CR>
 
-nmap <F2> <Plug>(coc-definition)
 nmap :cr :!command cargo r<CR>
 nmap <F6> :EditorConfigReload<CR>
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
