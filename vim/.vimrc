@@ -1,6 +1,5 @@
 autocmd! bufwritepost .vimrc source %
 
-let g:ale_disable_lsp = 1
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -19,13 +18,18 @@ Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ap/vim-css-color'
 Plugin 'Yggdroot/indentLine'
+Plugin 'jmcantrell/vim-virtualenv'
 
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'edkolev/tmuxline.vim'
 
+Plugin 'google/vim-searchindex'
+
 call vundle#end()            " required
 
-set term=screen-256color
+syntax on
+colorscheme miramare
+
 set clipboard=unnamed
 set mouse=a " click with mouse
 set wildmenu
@@ -76,6 +80,7 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 
 let g:fzf_preview_window = 'right:70%'
 
+let g:ale_disable_lsp = 1
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '🛑'
 let g:ale_sign_warning = '⚠️'
@@ -87,14 +92,20 @@ let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 0
 let g:ale_list_window_size = 3
 
-let b:ale_linters = ['flake8', 'pylint']
+let b:ale_linters = {
+\   'python': ['flake8', 'pylint', 'mypy'],
+\   'cpp': ['clang'],
+\   'c': ['clang'],
+\}
+
 let b:ale_fixers = {
 \   'python': ['black', 'isort'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
-\   'sass': ['prettier'],
 \   'vue': ['prettier'],
 \   'html': ['prettier'],
+\   'cpp': ['clang-format'],
+\   'c': ['clang-format'],
 \}
 
 let g:airline_theme='onedark'
@@ -110,10 +121,6 @@ filetype plugin indent on
 set nocompatible
 
 set showcmd " show commands at bottom
-syntax on
-
-colorscheme miramare
-
 
 augroup remember_folds
   autocmd!
