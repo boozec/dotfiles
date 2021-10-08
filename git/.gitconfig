@@ -12,7 +12,7 @@
 [credential]
 	helper = store
 [core]
-	editor = vim
+	editor = nvim
 	pager = delta
 [init]
 	defaultBranch = main

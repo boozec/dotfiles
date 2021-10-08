@@ -38,7 +38,7 @@ let s:palette = {
       \ 'bg_blue':    ['#203a41',   '17',   'DarkBlue'],
       \ 'fg':         ['#e6d6ac',   '223',  'White'],
       \ 'red':        ['#e68183',   '167',  'Red'],
-      \ 'orange':     ['#e39b7b',   '208',  'Red'],
+      \ 'orange':     ['#fabd2f',   '208',  'Red'],
       \ 'yellow':     ['#d9bb80',   '214',  'Yellow'],
       \ 'green':      ['#a7c080',   '142',  'Green'],
       \ 'cyan':       ['#87c095',   '108',   'Cyan'],
@@ -157,9 +157,9 @@ call s:HL('CursorColumn', s:palette.none, s:palette.bg1)
 call s:HL('CursorLine', s:palette.none, s:palette.bg1)
 call s:HL('LineNr', s:palette.grey, s:palette.none)
 if &relativenumber == 1 && &cursorline == 0
-  call s:HL('CursorLineNr', s:palette.fg, s:palette.none)
+  call s:HL('CursorLineNr', s:palette.yellow, s:palette.none)
 else
-  call s:HL('CursorLineNr', s:palette.fg, s:palette.bg1)
+  call s:HL('CursorLineNr', s:palette.yellow, s:palette.none)
 endif
 call s:HL('DiffAdd', s:palette.none, s:palette.bg_green)
 call s:HL('DiffChange', s:palette.none, s:palette.bg_blue)

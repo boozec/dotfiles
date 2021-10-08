@@ -1,31 +1,28 @@
 autocmd! bufwritepost .vimrc source %
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
+Plug 'rust-lang/rust.vim' 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+"Plug 'vim-airline/vim-airline'
+Plug 'shadmansaleh/lualine.nvim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim' " fuzzy finder
+Plug 'luochen1990/rainbow' " color parentheses
+Plug 'dense-analysis/ale' " checker syntax
+Plug 'posva/vim-vue'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'editorconfig/editorconfig-vim'
+Plug 'ap/vim-css-color'
+Plug 'Yggdroot/indentLine'
+Plug 'jmcantrell/vim-virtualenv'
 
-Plugin 'rust-lang/rust.vim' 
-Plugin 'airblade/vim-gitgutter' " display git status of the file
-Plugin 'vim-airline/vim-airline' " airline at bottom with insert, name, line etc.
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plugin 'junegunn/fzf.vim' " fuzzy finder
-Plugin 'luochen1990/rainbow' " color parentheses
-Plugin 'dense-analysis/ale' " checker syntax
-Plugin 'posva/vim-vue'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-fugitive' " git extension for commit logs and etc.
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'ap/vim-css-color'
-Plugin 'Yggdroot/indentLine'
-Plugin 'jmcantrell/vim-virtualenv'
+Plug 'ryanoasis/vim-devicons'
 
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'edkolev/tmuxline.vim'
+Plug 'google/vim-searchindex'
 
-Plugin 'google/vim-searchindex'
-
-call vundle#end()            " required
+call plug#end()            " required
 
 syntax on
 colorscheme miramare
@@ -108,8 +105,14 @@ let b:ale_fixers = {
 \   'c': ['clang-format'],
 \}
 
-let g:airline_theme='onedark'
-let g:airline_powerline_fonts = 1
+
+set statusline^=%{coc#status()}
+let g:airline#extensions#coc#enabled = 0
+
+if has('nvim')
+    lua require('evil_lualine')
+    lua require('git')
+endif
 
 let g:indentLine_char = '¦'
 
@@ -166,8 +169,10 @@ nnoremap :gd :Git diff<CR>
 nnoremap :pa :set paste<CR>
 nnoremap :npa :set nopaste<CR>
 
+
 nmap :cr :!command cargo r<CR>
 nmap <F6> :EditorConfigReload<CR>
+
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -178,3 +183,13 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+"VimDiff shortcuts
+if &diff
+  "Get from remote
+  nnoremap dr :diffget<Space>RE<CR>
+  "Get from base
+  nnoremap db :diffget<Space>BA<CR>
+  "Get from local
+  nnoremap dl :diffget<Space>LO<CR>
+endif
