@@ -12,7 +12,6 @@ Plug 'dense-analysis/ale' " checker syntax
 Plug 'posva/vim-vue'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ap/vim-css-color'
 Plug 'Yggdroot/indentLine'
@@ -22,10 +21,20 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'google/vim-searchindex'
 
+Plug 'rktjmp/lush.nvim'
+Plug 'ellisonleao/gruvbox.nvim'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'nvim-lua/completion-nvim'
+
+
 call plug#end()            " required
 
 syntax on
-colorscheme miramare
+
+set runtimepath+=~/.vim-plugins/LanguageClient-neovim
 
 set clipboard=unnamed
 set mouse=a " click with mouse
@@ -105,13 +114,13 @@ let b:ale_fixers = {
 \   'c': ['clang-format'],
 \}
 
-
-set statusline^=%{coc#status()}
-let g:airline#extensions#coc#enabled = 0
-
 if has('nvim')
     lua require('evil_lualine')
     lua require('git')
+
+    colorscheme gruvbox
+else
+    colorscheme miramare
 endif
 
 let g:indentLine_char = '¦'
@@ -134,6 +143,8 @@ augroup END
 " ------------
 " MAPS
 " -----------
+let mapleader = ","
+
 nnoremap j gj
 nnoremap k gk
 
@@ -160,17 +171,17 @@ nnoremap ,o :only<CR>
 " co = open commits explorer
 " gf = open git ls-files
 " gs = open git status
-nnoremap :ff :Files .<CR>
-nnoremap :co :Commits<CR>
+nnoremap <leader>ff :Files .<CR>
+nnoremap <leader>co :Commits<CR>
 nnoremap :gf :GFiles<CR>
 nnoremap :gs :GFiles?<CR>
 nnoremap :gd :Git diff<CR>
 
-nnoremap :pa :set paste<CR>
-nnoremap :npa :set nopaste<CR>
+nnoremap <leader>pa :set paste<CR>
+nnoremap <leader>npa :set nopaste<CR>
 
 
-nmap :cr :!command cargo r<CR>
+nmap <leader>cr :!command cargo r<CR>
 nmap <F6> :EditorConfigReload<CR>
 
 
@@ -184,7 +195,58 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-"VimDiff shortcuts
+" LSP configuration
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+  -- Forward to other plugins
+  require'completion'.on_attach(client)
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'rust_analyzer' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+EOF
+
 if &diff
   "Get from remote
   nnoremap dr :diffget<Space>RE<CR>
@@ -193,3 +255,4 @@ if &diff
   "Get from local
   nnoremap dl :diffget<Space>LO<CR>
 endif
+
