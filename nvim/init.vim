@@ -5,7 +5,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 "Plug 'vim-airline/vim-airline'
-Plug 'shadmansaleh/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim' " fuzzy finder
 Plug 'luochen1990/rainbow' " color parentheses
 Plug 'dense-analysis/ale' " checker syntax
@@ -27,8 +28,13 @@ Plug 'ellisonleao/gruvbox.nvim'
 " LSP
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-lua/lsp_extensions.nvim'
-    Plug 'nvim-lua/completion-nvim'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/nvim-cmp'
+
+    " For vsnip users.
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
 endif
 
 
@@ -37,6 +43,8 @@ call plug#end()            " required
 syntax on
 
 set runtimepath+=~/.vim-plugins/LanguageClient-neovim
+
+set completeopt=menu,menuone,noselect
 
 set clipboard=unnamed
 set mouse=a " click with mouse
