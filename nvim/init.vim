@@ -25,16 +25,10 @@ Plug 'google/vim-searchindex'
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
 
-" LSP
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/nvim-cmp'
-
-    " For vsnip users.
-    Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'
+    Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+    Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 endif
 
 
@@ -127,6 +121,8 @@ let b:ale_fixers = {
 if has('nvim')
     lua require('evil_lualine')
     lua require('git')
+
+    let g:coq_settings = { 'auto_start': v:true }
     lua require('lsp')
 
     colorscheme gruvbox
@@ -184,9 +180,6 @@ nnoremap ,o :only<CR>
 " gs = open git status
 nnoremap <leader>ff :Files .<CR>
 nnoremap <leader>co :Commits<CR>
-nnoremap :gf :GFiles<CR>
-nnoremap :gs :GFiles?<CR>
-nnoremap :gd :Git diff<CR>
 
 nnoremap <leader>pa :set paste<CR>
 nnoremap <leader>npa :set nopaste<CR>
@@ -194,18 +187,6 @@ nnoremap <leader>npa :set nopaste<CR>
 
 nmap <leader>cr :!command cargo r<CR>
 nmap <F6> :EditorConfigReload<CR>
-
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
 
 if &diff
   "Get from remote

@@ -1,29 +1,5 @@
 local nvim_lsp = require('lspconfig')
-local cmp = require'cmp'
-
-cmp.setup({
-  sources = {
-    {name = 'buffer'},
-    {name = 'nvim_lsp'},
-    {name = 'vsnip'},
-  },
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  mapping = {
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  },
-  documentation = {
-    border = 'rounded',
-  },
-})
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+local coq = require('coq')
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -50,7 +26,7 @@ end
 local servers = { 'jedi_language_server', 'rust_analyzer', 'tsserver', 'clangd' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    capabilities = capabilities,
+    capabilities = coq.lsp_ensure_capabilities(),
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
