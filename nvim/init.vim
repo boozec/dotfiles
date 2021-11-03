@@ -1,13 +1,12 @@
-autocmd! bufwritepost .vimrc source %
+"autocmd! bufwritepost .vimrc source %
 
 call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim' 
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'lewis6991/gitsigns.nvim'
-"Plug 'vim-airline/vim-airline'
-Plug 'nvim-lualine/lualine.nvim'
+Plug 'famiu/feline.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim' " fuzzy finder
 Plug 'luochen1990/rainbow' " color parentheses
 Plug 'dense-analysis/ale' " checker syntax
 Plug 'posva/vim-vue'
@@ -16,9 +15,7 @@ Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ap/vim-css-color'
 Plug 'Yggdroot/indentLine'
-Plug 'jmcantrell/vim-virtualenv'
-
-Plug 'ryanoasis/vim-devicons'
+Plug 'famiu/bufdelete.nvim'
 
 Plug 'google/vim-searchindex'
 
@@ -82,6 +79,8 @@ set splitright " split on right side
 set lazyredraw
 set ttyfast
 
+set noswapfile
+
 " rust
 let g:rustfmt_autosave = 1
 let g:rustfmt_emit_files = 1
@@ -119,11 +118,11 @@ let b:ale_fixers = {
 \}
 
 if has('nvim')
-    lua require('evil_lualine')
+    set termguicolors
+    lua require('feline_style')
     lua require('git')
-
     let g:coq_settings = { 'auto_start': v:true }
-    lua require('lsp')
+    lua require('lsp_conf')
 
     colorscheme gruvbox
 else
@@ -141,12 +140,6 @@ set nocompatible
 
 set showcmd " show commands at bottom
 
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
-
 " ------------
 " MAPS
 " -----------
@@ -157,29 +150,26 @@ nnoremap k gk
 
 nnoremap tn :tabnew<CR>
 nnoremap :ve :Vexplore<CR>
-nnoremap :rt :RainbowToggle<CR>
+nnoremap <leader>rt :RainbowToggle<CR>
 
 " buffers
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
-nnoremap ,b :Buffers<CR>
+nnoremap <leader>b :Buffers<CR>
 
 " tabs
 nnoremap ]t :tabn<CR>
 nnoremap [t :tabp<CR>
-nnoremap ,t :tabs<CR>
+nnoremap <leader>t :tabs<CR>
 
 " only one window
-nnoremap ,o :only<CR>
+nnoremap <leader>o :only<CR>
 
 
-" mapping fzf commands
-" ff = open files explorer
-" co = open commits explorer
-" gf = open git ls-files
-" gs = open git status
-nnoremap <leader>ff :Files .<CR>
-nnoremap <leader>co :Commits<CR>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader>pa :set paste<CR>
 nnoremap <leader>npa :set nopaste<CR>
