@@ -155,7 +155,6 @@ nnoremap <leader>rt :RainbowToggle<CR>
 " buffers
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
-nnoremap <leader>b :Buffers<CR>
 
 " tabs
 nnoremap ]t :tabn<CR>
