@@ -3,7 +3,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim' 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'famiu/feline.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -15,7 +14,6 @@ Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ap/vim-css-color'
 Plug 'Yggdroot/indentLine'
-Plug 'famiu/bufdelete.nvim'
 
 Plug 'google/vim-searchindex'
 
@@ -23,6 +21,8 @@ Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
 
 if has('nvim')
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'famiu/bufdelete.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
     Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
