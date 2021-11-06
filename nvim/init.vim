@@ -26,6 +26,8 @@ if has('nvim')
     Plug 'neovim/nvim-lspconfig'
     Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
     Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'ray-x/lsp_signature.nvim'
 endif
 
 
@@ -124,6 +126,9 @@ if has('nvim')
     let g:coq_settings = { 'auto_start': v:true }
     lua require('lsp_conf')
 
+    lua require'nvim-tree'.setup()
+    lua require "lsp_signature".setup()
+
     colorscheme gruvbox
 else
     colorscheme miramare
@@ -140,6 +145,12 @@ set nocompatible
 
 set showcmd " show commands at bottom
 
+
+" nvim-tree
+let g:nvim_tree_quit_on_open = 1
+let g:nvim_tree_highlight_opened_files = 1
+nnoremap <C-t> :NvimTreeToggle<CR>
+
 " ------------
 " MAPS
 " -----------
@@ -155,6 +166,7 @@ nnoremap <leader>rt :RainbowToggle<CR>
 " buffers
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
+nnoremap <leader>b <cmd>Telescope buffers<cr>
 
 " tabs
 nnoremap ]t :tabn<CR>
@@ -167,7 +179,6 @@ nnoremap <leader>o :only<CR>
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader>pa :set paste<CR>
