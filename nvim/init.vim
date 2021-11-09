@@ -2,6 +2,7 @@
 
 call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim' 
+Plug 'cespare/vim-toml', { 'branch': 'main' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'famiu/feline.nvim'
@@ -28,6 +29,8 @@ if has('nvim')
     Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'ray-x/lsp_signature.nvim'
+    Plug 'folke/todo-comments.nvim'
+    Plug 'saecki/crates.nvim'
 endif
 
 
@@ -44,7 +47,6 @@ set mouse=a " click with mouse
 set wildmenu
 set wildmode=longest,list:full
 set wildignore=*~,*.png,*.jpg,*.gif,Thumbs.db,*.min.js,*.swp,*.o,vendor
-
 
 set number " number of the current line
 set relativenumber " relative number, ..-2 -1 x 1 2, where x is current line
@@ -196,4 +198,3 @@ if &diff
   "Get from local
   nnoremap dl :diffget<Space>LO<CR>
 endif
-
