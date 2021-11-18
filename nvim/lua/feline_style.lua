@@ -60,7 +60,7 @@ local comps = {
     vi_mode = {
         left = {
             provider = function()
-              return '  ' .. vi_mode_utils.get_vim_mode()
+              return vi_mode_utils.get_vim_mode()
             end,
             hl = function()
                 local val = {
@@ -72,19 +72,6 @@ local comps = {
             end,
             right_sep = ' '
         },
-        right = {
-            -- provider = '▊',
-            provider = '' ,
-            hl = function()
-                local val = {
-                    name = vi_mode_utils.get_mode_highlight_name(),
-                    fg = vi_mode_utils.get_mode_color()
-                }
-                return val
-            end,
-            left_sep = ' ',
-            right_sep = ' '
-        }
     },
     file = {
         info = {
@@ -220,6 +207,7 @@ local comps = {
         },
         change = {
             provider = 'git_diff_changed',
+            icon = '  ',
             hl = {
                 fg = colors.orange
             }

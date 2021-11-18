@@ -2,13 +2,12 @@ autocmd! bufwritepost .vimrc source %
 
 call plug#begin('~/.vim/plugged')
 Plug 'cespare/vim-toml', { 'branch': 'main' }
-Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'famiu/feline.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'luochen1990/rainbow' " color parentheses
-Plug 'dense-analysis/ale' " checker syntax
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
 Plug 'editorconfig/editorconfig-vim'
@@ -33,6 +32,13 @@ if has('nvim')
     Plug 'saecki/crates.nvim'
     Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+    Plug 'jose-elias-alvarez/null-ls.nvim'
+    Plug 'folke/trouble.nvim'
+    Plug 'folke/lsp-colors.nvim'
+
+    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+    Plug 'ray-x/navigator.lua'
 endif
 
 
@@ -88,38 +94,10 @@ set ttyfast
 set noswapfile
 
 " rust
-let g:rustfmt_autosave = 1
-let g:rustfmt_emit_files = 1
-let g:rustfmt_fail_silently = 0
-let g:rust_clip_command = 'xclip -selection clipboard'
-
-let g:ale_disable_lsp = 1
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = '🛑'
-let g:ale_sign_warning = '⚠️'
-let g:ale_sign_info = '💭'
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%severity%] [%linter%] %s'
-let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 0
-let g:ale_list_window_size = 3
-
-let b:ale_linters = {
-\   'python': ['flake8', 'pylint', 'mypy'],
-\   'cpp': ['clang'],
-\   'c': ['clang'],
-\}
-
-let b:ale_fixers = {
-\   'python': ['black', 'isort'],
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'vue': ['prettier'],
-\   'cpp': ['clang-format'],
-\   'c': ['clang-format'],
-\}
-
+"   let g:rustfmt_autosave = 1
+"   let g:rustfmt_emit_files = 1
+"   let g:rustfmt_fail_silently = 0
+"   let g:rust_clip_command = 'xclip -selection clipboard'
 
 if has('nvim')
     set termguicolors
@@ -147,6 +125,11 @@ if has('nvim')
       \ ],
       \ })))
     lua require('nvim-treesitter.configs').setup({ highlight = { enable = true, }, })
+
+    lua require("lsp-colors").setup()
+
+    lua require('navigator').setup()
+    
 else
     colorscheme miramare
 endif
@@ -185,7 +168,6 @@ nnoremap <leader>b <cmd>Telescope buffers<cr>
 " tabs
 nnoremap ]t :tabn<CR>
 nnoremap [t :tabp<CR>
-nnoremap <leader>t :tabs<CR>
 
 " only one window
 nnoremap <leader>o :only<CR>
