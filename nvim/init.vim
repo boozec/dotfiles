@@ -1,15 +1,14 @@
-"autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .vimrc source %
 
 call plug#begin('~/.vim/plugged')
-Plug 'rust-lang/rust.vim' 
 Plug 'cespare/vim-toml', { 'branch': 'main' }
+Plug 'rust-lang/rust.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'famiu/feline.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'luochen1990/rainbow' " color parentheses
 Plug 'dense-analysis/ale' " checker syntax
-Plug 'posva/vim-vue'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
 Plug 'editorconfig/editorconfig-vim'
@@ -21,9 +20,10 @@ Plug 'google/vim-searchindex'
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
 
+Plug 'kazhala/close-buffers.nvim'
+
 if has('nvim')
     Plug 'nvim-telescope/telescope.nvim'
-    Plug 'famiu/bufdelete.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
     Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
@@ -31,6 +31,8 @@ if has('nvim')
     Plug 'ray-x/lsp_signature.nvim'
     Plug 'folke/todo-comments.nvim'
     Plug 'saecki/crates.nvim'
+    Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 
 
@@ -91,8 +93,6 @@ let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
 let g:rust_clip_command = 'xclip -selection clipboard'
 
-let g:fzf_preview_window = 'right:70%'
-
 let g:ale_disable_lsp = 1
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '🛑'
@@ -116,10 +116,10 @@ let b:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'vue': ['prettier'],
-\   'html': ['prettier'],
 \   'cpp': ['clang-format'],
 \   'c': ['clang-format'],
 \}
+
 
 if has('nvim')
     set termguicolors
@@ -128,17 +128,30 @@ if has('nvim')
     let g:coq_settings = { 'auto_start': v:true }
     lua require('lsp_conf')
 
-    lua require'nvim-tree'.setup()
-    lua require "lsp_signature".setup()
+    lua require('nvim-tree').setup()
+    lua require('lsp_signature').setup()
+    lua require('todo-comments').setup()
 
     colorscheme gruvbox
+
+    call wilder#setup({
+      \ 'modes': [':', '/', '?'],
+      \ })
+    call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
+      \ 'highlights': {
+      \   'border': 'Normal',
+      \ },
+      \ 'border': 'rounded',
+      \ 'left': [
+      \   ' ', wilder#popupmenu_devicons(),
+      \ ],
+      \ })))
+    lua require('nvim-treesitter.configs').setup({ highlight = { enable = true, }, })
 else
     colorscheme miramare
 endif
 
 let g:indentLine_char = '¦'
-
-let g:vue_pre_processors = ['pug', 'scss']
 
 let g:netrw_liststyle=1
 
@@ -162,7 +175,6 @@ nnoremap j gj
 nnoremap k gk
 
 nnoremap tn :tabnew<CR>
-nnoremap :ve :Vexplore<CR>
 nnoremap <leader>rt :RainbowToggle<CR>
 
 " buffers
