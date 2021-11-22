@@ -38,7 +38,6 @@ if has('nvim')
     Plug 'folke/lsp-colors.nvim'
 
     Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-    Plug 'ray-x/navigator.lua'
 endif
 
 
@@ -127,9 +126,6 @@ if has('nvim')
     lua require('nvim-treesitter.configs').setup({ highlight = { enable = true, }, })
 
     lua require("lsp-colors").setup()
-
-    lua require('navigator').setup()
-    
 else
     colorscheme miramare
 endif

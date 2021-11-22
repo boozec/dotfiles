@@ -93,14 +93,14 @@ local comps = {
         type = {
             provider = 'file_type'
         },
-        os = {
-            provider = file_osinfo,
-            left_sep = ' ',
-            hl = {
-                fg = colors.violet,
-                style = 'bold'
-            }
-        },
+        --  os = {
+        --      provider = file_osinfo,
+        --      left_sep = ' ',
+        --      hl = {
+        --          fg = colors.violet,
+        --          style = 'bold'
+        --      }
+        --  },
         position = {
             provider = 'position',
             left_sep = ' ',
@@ -119,19 +119,19 @@ local comps = {
     },
     line_percentage = {
         provider = 'line_percentage',
-        left_sep = ' ',
+        left_sep = '   ',
         hl = {
             style = 'bold'
         }
     },
-    scroll_bar = {
-        provider = 'scroll_bar',
-        left_sep = ' ',
-        hl = {
-            fg = colors.blue,
-            style = 'bold'
-        }
-    },
+    --  scroll_bar = {
+    --      provider = 'scroll_bar',
+    --      left_sep = ' ',
+    --      hl = {
+    --          fg = colors.blue,
+    --          style = 'bold'
+    --      }
+    --  },
     diagnos = {
         err = {
             -- provider = 'diagnostic_errors',
