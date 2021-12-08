@@ -1,0 +1,39 @@
+command=/usr/share/i3blocks/$BLOCK_NAME
+separator_block_width=15
+
+[weather]
+command=curl -Ss 'https://wttr.in/Catania?0&T&Q' | cut -c 16- | head -2 | xargs echo
+interval=3600
+color=#A4C2F4
+
+[memory]
+label=MEM
+separator=false
+interval=30
+
+[disk]
+label=DISK
+interval=30
+
+[cpu_usage]
+label=CPU
+interval=10
+min_width=CPU: 100.00%
+
+[wifi]
+command=iwgetid -r | tr '\n' ' ' && grep $(iwgetid -m | awk '{ printf "%s", $1 }') /proc/net/wireless | awk '{ printf "%i%\n", int($3 * 100 / 70) }';exit 0 instance=wlp2s0
+interval=5
+label= 
+
+[battery]
+command=i3_battery.sh
+interval=10
+
+[volume]
+command=pulsemixer --get-volume | cut -d " " -f 1; exit 0
+interval=1
+label= 
+
+[time]
+command=date
+interval=1
