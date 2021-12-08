@@ -4,7 +4,7 @@ local null_ls = require("null-ls")
 local trouble = require("trouble")
 
 -- Redefine sign.
-local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
+local signs = { Error = 'E', Warning = 'W', Hint = 'H', Information = 'I' }
 
 for type, icon in pairs(signs) do
   local hl = 'LspDiagnosticsSign' .. type
@@ -42,6 +42,8 @@ for _, lsp in ipairs(servers) do
     on_attach = function(client, bufnr)
       client.resolved_capabilities.document_formatting = false
 
+      require "lsp_signature".on_attach()
+
       -- Mappings.
       local opts = { noremap=true, silent=true }
 
@@ -61,6 +63,7 @@ end
 nvim_lsp["null-ls"].setup({
     on_attach = function(client)
         if client.resolved_capabilities.document_formatting then
+            buf_set_keymap('n', '<A-f>', '<cmd>lua vim.lsp.buf.formatting_sync()<cr>', opts)
             vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()"
         end
     end

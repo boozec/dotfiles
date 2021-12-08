@@ -5,7 +5,7 @@ Plug 'cespare/vim-toml', { 'branch': 'main' }
 "Plug 'rust-lang/rust.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'famiu/feline.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'luochen1990/rainbow' " color parentheses
 Plug 'terryma/vim-multiple-cursors'
@@ -16,12 +16,12 @@ Plug 'Yggdroot/indentLine'
 
 Plug 'google/vim-searchindex'
 
-Plug 'rktjmp/lush.nvim'
-Plug 'ellisonleao/gruvbox.nvim'
-
 Plug 'kazhala/close-buffers.nvim'
 
 if has('nvim')
+    Plug 'rktjmp/lush.nvim'
+    Plug 'ellisonleao/gruvbox.nvim'
+
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
@@ -36,8 +36,6 @@ if has('nvim')
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
-
-    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
 endif
 
 
@@ -79,7 +77,7 @@ set incsearch
 set nowritebackup
 set laststatus=2
 
-set cursorline
+"set cursorline
 
 set list " spaces as characters
 set listchars=eol:⏎,tab:»·,trail:ˑ,nbsp:⎵
@@ -98,18 +96,20 @@ set noswapfile
 "   let g:rustfmt_fail_silently = 0
 "   let g:rust_clip_command = 'xclip -selection clipboard'
 
+set termguicolors
+set background=dark
+
 if has('nvim')
-    set termguicolors
-    lua require('feline_style')
+    colorscheme gruvbox
+    highlight CursorLineNr ctermbg=NONE guibg=NONE
+
+    lua require('lualine_style')
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
     lua require('lsp_conf')
 
     lua require('nvim-tree').setup()
-    lua require('lsp_signature').setup()
     lua require('todo-comments').setup()
-
-    colorscheme gruvbox
 
     call wilder#setup({
       \ 'modes': [':', '/', '?'],
@@ -125,9 +125,11 @@ if has('nvim')
       \ })))
     lua require('nvim-treesitter.configs').setup({ highlight = { enable = true, }, })
 
-    lua require("lsp-colors").setup()
+    lua require('lsp-colors').setup()
+
+    nnoremap <leader>xx <cmd>TroubleToggle<cr>
 else
-    colorscheme miramare
+    colorscheme pablo
 endif
 
 let g:indentLine_char = '¦'
