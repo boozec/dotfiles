@@ -1,0 +1,38 @@
+shell:
+  program: /usr/bin/tmux
+  args:
+    - new-session
+
+font:
+  normal:
+    family: DejaVuSansMono
+    style: Nerd
+
+colors:
+  primary:
+    background: "0x111111"
+    foreground: "0xc1c1c1"
+
+  cursor:
+    text: "0x424242"
+    cursor: "0x808080"
+
+  normal:
+    black: "0x111111"
+    red: "0xaf005f"
+    green: "0x5faf00"
+    yellow: "0xd7af5f"
+    blue: "0x5fafd7"
+    magenta: "0x808080"
+    cyan: "0xd7875f"
+    white: "0xf2f2f2"
+
+  bright:
+    black: "0x6a6a6a"
+    red: "0x5faf5f"
+    green: "0xafd700"
+    yellow: "0xaf87d7"
+    blue: "0xffaf00"
+    magenta: "0xffaf00"
+    cyan: "0x00afaf"
+    white: "0x5f8787"
