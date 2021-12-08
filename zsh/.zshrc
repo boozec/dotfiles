@@ -1,10 +1,15 @@
 # now use Starship instead of oh-my-zsh theme
 export ZSH="/home/dcariotti/.oh-my-zsh"
-plugins=(git)
+#ZSH_THEME="essembeh"
+ZSH_THEME="lukerandall"
+plugins=(
+ git
+ zsh-autosuggestions
+ zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
-[[ $TERM != "screen" ]] && exec tmux
 eval "$(starship init zsh)"
 
 export NVM_DIR="$HOME/.nvm"
@@ -25,16 +30,7 @@ export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 alias mutt=neomutt
 export TERM=xterm-256color
 
-rga() {
-    RG_PREFIX="rg --files-with-matches"
-    local file
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-    file="$(
-        FZF_DEFAULT_COMMAND="$RG_PREFIX '$*'" \
-            fzf --sort --preview="[[ ! -z {} ]] && rg --pretty --context 5 {q}" \
-                --phony -q "$*"  \
-                --bind "change:reload:$RG_PREFIX {q}" \
-                --preview-window="70%:wrap"
-    )" &&
-    xdg-open "$file"
-}
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
