@@ -1,3 +1,4 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
 shell:
   program: /usr/bin/tmux
   args:
@@ -21,17 +22,17 @@ colors:
     black: "0x111111"
     red: "0xaf005f"
     green: "0x5faf00"
-    yellow: "0xd7af5f"
+    yellow: "0xf1c40f"
     blue: "0x5fafd7"
     magenta: "0x808080"
-    cyan: "0xd7875f"
+    cyan: "0x2ecc71"
     white: "0xf2f2f2"
 
   bright:
     black: "0x6a6a6a"
-    red: "0x5faf5f"
+    red: "0xe74c3c"
     green: "0xafd700"
-    yellow: "0xaf87d7"
+    yellow: "0xf1c40f"
     blue: "0xffaf00"
     magenta: "0xffaf00"
     cyan: "0x00afaf"
