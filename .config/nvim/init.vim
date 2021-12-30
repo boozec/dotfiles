@@ -17,6 +17,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'google/vim-searchindex'
 
 Plug 'kazhala/close-buffers.nvim'
+Plug 'numToStr/Comment.nvim'
 
 if has('nvim')
     Plug 'rktjmp/lush.nvim'
@@ -33,9 +34,16 @@ if has('nvim')
     Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+    Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
+
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
+
+    Plug 'vim-test/vim-test'
+    Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+
+    Plug 'matze/vim-move'
 endif
 
 
@@ -103,31 +111,49 @@ if has('nvim')
     colorscheme gruvbox
     highlight CursorLineNr ctermbg=NONE guibg=NONE
 
-    lua require('lualine_style')
+    "lua require('lualine_style')
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
     lua require('lsp_conf')
 
     lua require('nvim-tree').setup()
     lua require('todo-comments').setup()
+    lua require('crates').setup()
 
-    call wilder#setup({
-      \ 'modes': [':', '/', '?'],
-      \ })
-    call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
-      \ 'highlights': {
-      \   'border': 'Normal',
-      \ },
-      \ 'border': 'rounded',
-      \ 'left': [
-      \   ' ', wilder#popupmenu_devicons(),
-      \ ],
-      \ })))
+    " call wilder#setup({
+    "   \ 'modes': [':', '/', '?'],
+    "   \ })
+    " call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
+    "   \ 'highlights': {
+    "   \   'border': 'Normal',
+    "   \ },
+    "   \ 'border': 'rounded',
+    "   \ 'left': [
+    "   \   ' ', wilder#popupmenu_devicons(),
+    "   \ ],
+    "   \ })))
     lua require('nvim-treesitter.configs').setup({ highlight = { enable = true, }, })
 
     lua require('lsp-colors').setup()
 
-    nnoremap <leader>xx <cmd>TroubleToggle<cr>
+    lua require('Comment').setup()
+
+    "let g:loaded_nvimgdb = 1
+    function! NvimGdbNoTKeymaps()
+      tnoremap <silent> <buffer> <esc> <c-\><c-n>
+    endfunction
+
+    let g:nvimgdb_config_override = {
+      \ 'key_next': 'n',
+      \ 'key_step': 's',
+      \ 'key_finish': 'f',
+      \ 'key_continue': 'c',
+      \ 'key_until': 'u',
+      \ 'key_breakpoint': 'b',
+      \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
+      \ }
+
+    "lua require('gomove').setup()
 else
     colorscheme pablo
 endif
@@ -140,7 +166,6 @@ filetype plugin indent on
 set nocompatible
 
 set showcmd " show commands at bottom
-
 
 " nvim-tree
 let g:nvim_tree_quit_on_open = 1
@@ -157,6 +182,7 @@ nnoremap k gk
 
 nnoremap tn :tabnew<CR>
 nnoremap <leader>rt :RainbowToggle<CR>
+nnoremap <leader>xx :TroubleToggle<cr>
 
 " buffers
 nnoremap ]b :bnext<CR>
