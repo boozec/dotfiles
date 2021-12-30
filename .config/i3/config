@@ -107,7 +107,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $sink toggle
 # Screenshots
 set $screenshot-name `date +%d%m%Y-%H%M%S.png`
 bindsym Print exec import -window root $screenshot-name
-bindsym Shift+Print exec import $screenshot-name
+bindsym Shift+Print exec --no-startup-id mate-screenshot -a
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -131,7 +131,6 @@ mode "resize"
 
 bindsym $mod+r mode "resize"
 
-
 # Start i3blocks to display a workspace bar
 bar {
     font pango: DejaVuSansMono Nerd Font 9
@@ -142,14 +141,12 @@ bar {
     status_command i3blocks
 
     colors {
-        background #282A36
-        statusline #F8F8F2
-        separator  #44475A
-
-        focused_workspace  #44475A #44475A #F8F8F2
-        active_workspace   #282A36 #44475A #F8F8F2
-        inactive_workspace #282A36 #282A36 #BFBFBF
-        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        binding_mode       #FF5555 #FF5555 #F8F8F2
+        separator #666666
+        background #111111
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #999999
+        urgent_workspace #2f343a #900000 #ffffff
     }
 }
