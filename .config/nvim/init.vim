@@ -19,6 +19,8 @@ Plug 'google/vim-searchindex'
 Plug 'kazhala/close-buffers.nvim'
 Plug 'numToStr/Comment.nvim'
 
+Plug 'matze/vim-move'
+
 if has('nvim')
     Plug 'rktjmp/lush.nvim'
     Plug 'ellisonleao/gruvbox.nvim'
@@ -42,8 +44,6 @@ if has('nvim')
 
     Plug 'vim-test/vim-test'
     Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
-
-    Plug 'matze/vim-move'
 endif
 
 
