@@ -158,7 +158,7 @@ if has('nvim')
 
     "lua require('gomove').setup()
 else
-    colorscheme pablo
+    colorscheme industry
 endif
 
 let g:indentLine_char = '¦'
