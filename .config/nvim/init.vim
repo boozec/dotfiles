@@ -161,7 +161,9 @@ else
     colorscheme industry
 endif
 
+" indentline
 let g:indentLine_char = '¦'
+let g:vim_json_syntax_conceal = 0
 
 let g:netrw_liststyle=1
 
@@ -174,6 +176,9 @@ set showcmd " show commands at bottom
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_highlight_opened_files = 1
 nnoremap <C-t> :NvimTreeToggle<CR>
+
+" vim-move
+let g:move_key_modifier = 'C'
 
 " ------------
 " MAPS
