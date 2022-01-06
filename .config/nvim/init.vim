@@ -58,7 +58,7 @@ set completeopt=menu,menuone,noselect
 set clipboard=unnamed
 set mouse=a " click with mouse
 set wildmenu
-set wildmode=longest,list:full
+set wildmode=full
 set wildignore=*~,*.png,*.jpg,*.gif,Thumbs.db,*.min.js,*.swp,*.o,vendor
 
 set number " number of the current line
@@ -109,7 +109,10 @@ set background=dark
 
 if has('nvim')
     colorscheme gruvbox
-    highlight CursorLineNr ctermbg=NONE guibg=NONE
+    highlight CursorLineNr guibg=NONE
+    highlight Pmenu guibg=#222f3d guifg=#ecf0f1
+    highlight PmenuSel guibg=#000000 guifg=#f1c40f 
+    highlight StatusLine guibg=#ecf0f1 guifg=#282828
 
     "lua require('lualine_style')
     lua require('git')
