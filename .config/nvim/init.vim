@@ -82,7 +82,7 @@ set incsearch
 set nowritebackup
 set laststatus=2
 
-"set cursorline
+set cursorline " need for Neovim 0.6 for highlight CursorLineNr
 
 set list " spaces as characters
 set listchars=eol:⏎,tab:»·,trail:ˑ,nbsp:⎵
@@ -106,10 +106,12 @@ set background=dark
 
 if has('nvim')
     colorscheme gruvbox
-    highlight CursorLineNr guibg=NONE
+    highlight CursorLine guibg=NONE
+    highlight CursorLineNr guibg=NONE guifg=ORANGE
     highlight Pmenu guibg=#222f3d guifg=#ecf0f1
     highlight PmenuSel guibg=#000000 guifg=#f1c40f 
     highlight StatusLine guibg=#ecf0f1 guifg=#282828
+    highlight StatusLineNC guibg=#2c3e50 guifg=#282828
 
     "lua require('lualine_style')
     lua require('git')
