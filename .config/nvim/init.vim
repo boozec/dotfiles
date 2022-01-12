@@ -41,9 +41,6 @@ if has('nvim')
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
-
-    Plug 'vim-test/vim-test'
-    Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 endif
 
 
