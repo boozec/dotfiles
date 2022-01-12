@@ -33,7 +33,7 @@ if has('nvim')
     Plug 'ray-x/lsp_signature.nvim'
     Plug 'folke/todo-comments.nvim'
     Plug 'saecki/crates.nvim'
-    Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+    "Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
     Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
