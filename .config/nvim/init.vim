@@ -154,8 +154,6 @@ if has('nvim')
       \ 'key_breakpoint': 'b',
       \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
       \ }
-
-    "lua require('gomove').setup()
 else
     colorscheme industry
 endif
