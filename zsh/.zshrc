@@ -1,7 +1,7 @@
 # now use Starship instead of oh-my-zsh theme
 export ZSH="/home/dcariotti/.oh-my-zsh"
 #ZSH_THEME="essembeh"
-ZSH_THEME="lukerandall"
+ZSH_THEME="lukerandall-d"
 plugins=(
  git
  zsh-autosuggestions
