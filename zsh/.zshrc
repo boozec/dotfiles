@@ -24,10 +24,14 @@ export WORKON_HOME=$HOME/.virtualenvs
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 eval "$(direnv hook zsh)"
+eval "$(jump shell)"
+eval "$(mcfly init zsh)"
+
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/.gems"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 alias mutt=neomutt
+alias gap="git add -p"
 export TERM=xterm-256color
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
