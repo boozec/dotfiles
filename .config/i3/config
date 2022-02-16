@@ -1,10 +1,7 @@
 # Default modkey
 set $mod Mod4
 
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:DejaVu Sans Mono 10
-font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 11
-font pango:Terminus 11px
+font pango:Fantasque Sans Mono 11
 
 # Start a terminal
 bindsym $mod+Return exec alacritty --config-file ~/.alacrittyi3.yml
@@ -60,7 +57,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # Open d-menu
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec "rofi -show combi -combi-modi window,drun -matching normal -drun-match-fields name,exec"
 
 set $ws1 "1"
 set $ws2 "2"
@@ -100,13 +98,13 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Volume
 set $sink `pactl list short sinks | grep RUNNING | cut -f1`
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $sink +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $sink -10%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $sink +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $sink -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $sink toggle
 
 # Screenshots
 set $screenshot-name `date +%d%m%Y-%H%M%S.png`
-bindsym Print exec import -window root $screenshot-name
+bindsym Print exec "mate-screenshot -i"
 bindsym Shift+Print exec --no-startup-id mate-screenshot -a
 
 # Reload the configuration file
@@ -131,6 +129,18 @@ mode "resize"
 
 bindsym $mod+r mode "resize"
 
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+set $white #fbf1c7
+
 # Start i3blocks to display a workspace bar
 bar {
     font pango: DejaVuSansMono Nerd Font 9
@@ -141,12 +151,21 @@ bar {
     status_command i3blocks
 
     colors {
-        separator #666666
-        background #111111
-        statusline #dddddd
-        focused_workspace #0088CC #0088CC #ffffff
-        active_workspace #333333 #333333 #ffffff
-        inactive_workspace #333333 #333333 #999999
-        urgent_workspace #2f343a #900000 #ffffff
+        # bar background color
+        background $bg
+        # text color used for blocks that do not have a color specified.
+        statusline #fafafa
+        # workspaces section            
+        #                    border  backgr. text
+        focused_workspace    $aqua $aqua $darkgray
+        inactive_workspace   $darkgray $darkgray $yellow
+        active_workspace     $darkgray $darkgray $yellow
+        urgent_workspace     $red $red $bg
     }
 }
+
+client.focused          $darkgray $aqua #000000 $yellow $darkgray
+client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.urgent           $darkgray $red $white $red $red
+
