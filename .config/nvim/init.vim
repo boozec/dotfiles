@@ -2,13 +2,14 @@ autocmd! bufwritepost .vimrc source %
 
 call plug#begin('~/.vim/plugged')
 Plug 'cespare/vim-toml', { 'branch': 'main' }
-"Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'luochen1990/rainbow' " color parentheses
-Plug 'terryma/vim-multiple-cursors'
+"Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ap/vim-css-color'
@@ -20,6 +21,8 @@ Plug 'kazhala/close-buffers.nvim'
 Plug 'numToStr/Comment.nvim'
 
 Plug 'matze/vim-move'
+
+Plug 'togglebyte/togglerust' " Debug Rust projects
 
 if has('nvim')
     Plug 'rktjmp/lush.nvim'
@@ -36,11 +39,16 @@ if has('nvim')
     "Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-    Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
+    "Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
+
+    Plug 'sindrets/diffview.nvim'
+
+    " Used as light theme
+    Plug 'NLKNguyen/papercolor-theme'
 endif
 
 
@@ -82,14 +90,13 @@ set incsearch
 set nowritebackup
 set laststatus=2
 
-set cursorline " need for Neovim 0.6 for highlight CursorLineNr
-
 set list " spaces as characters
 set listchars=eol:⏎,tab:»·,trail:ˑ,nbsp:⎵
 
 set foldmethod=indent
 
 set splitright " split on right side
+set splitbelow
 set lazyredraw
 set ttyfast
 
@@ -112,6 +119,7 @@ if has('nvim')
     highlight PmenuSel guibg=#000000 guifg=#f1c40f 
     highlight StatusLine guibg=#ecf0f1 guifg=#282828
     highlight StatusLineNC guibg=#2c3e50 guifg=#282828
+    highlight Visual guibg=#fbf1c7 guifg=#d65d0e
 
     "lua require('lualine_style')
     lua require('git')
@@ -140,22 +148,35 @@ if has('nvim')
 
     lua require('Comment').setup()
 
-    "let g:loaded_nvimgdb = 1
-    function! NvimGdbNoTKeymaps()
-      tnoremap <silent> <buffer> <esc> <c-\><c-n>
-    endfunction
+    lua require('diffview').setup()
+    ca do DiffviewOpen
+    ca dc DiffviewClose
+    ca dh DiffviewFileHistory
 
-    let g:nvimgdb_config_override = {
-      \ 'key_next': 'n',
-      \ 'key_step': 's',
-      \ 'key_finish': 'f',
-      \ 'key_continue': 'c',
-      \ 'key_until': 'u',
-      \ 'key_breakpoint': 'b',
-      \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
-      \ }
+    "   function! NvimGdbNoTKeymaps()
+    "     tnoremap <silent> <buffer> <esc> <c-\><c-n>
+    "   endfunction
+
+    "   let g:nvimgdb_config_override = {
+    "     \ 'key_next': 'n',
+    "     \ 'key_step': 's',
+    "     \ 'key_finish': 'f',
+    "     \ 'key_continue': 'c',
+    "     \ 'key_until': 'u',
+    "     \ 'key_breakpoint': 'b',
+    "     \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
+    "     \ }
+
+    set cursorline " need for Neovim 0.6 for highlight CursorLineNr
 else
     colorscheme industry
+endif
+
+" Figure out the system Python for Neovim.
+if exists("$VIRTUAL_ENV")
+    let g:python3_host_prog=substitute(system("which -a python3 | head -n2 | tail -n1"), "\n", '', 'g')
+else
+    let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
 endif
 
 " indentline
@@ -185,8 +206,9 @@ let mapleader = ","
 nnoremap j gj
 nnoremap k gk
 
-nnoremap tn :tabnew<CR>
-nnoremap <leader>rt :RainbowToggle<CR>
+nnoremap tn :tabnew<cr>
+ca rt RainbowToggle
+
 nnoremap <leader>xx :TroubleToggle<cr>
 
 " buffers
@@ -210,7 +232,7 @@ nnoremap <leader>pa :set paste<CR>
 nnoremap <leader>npa :set nopaste<CR>
 
 
-nmap <leader>cr :!command cargo r<CR>
+nmap <leader>cr :Cargo run<CR>
 nmap <F6> :EditorConfigReload<CR>
 
 if &diff
@@ -221,3 +243,7 @@ if &diff
   "Get from local
   nnoremap dl :diffget<Space>LO<CR>
 endif
+
+packadd termdebug
+let g:termdebug_wide = 1
+let g:TermDebugging = 0
