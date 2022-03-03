@@ -5,13 +5,15 @@ shell:
     - new-session
 
 font:
+  size: 14
   normal:
-    family: DejaVuSansMono
+    # family: DejaVuSansMono
+    family: UbuntuMono
     style: Nerd
 
 colors:
   primary:
-    background: "0x111111"
+    background: "0x080808"
     foreground: "0xc1c1c1"
 
   cursor:
@@ -19,7 +21,7 @@ colors:
     cursor: "0x808080"
 
   normal:
-    black: "0x111111"
+    black: "0x080808"
     red: "0xaf005f"
     green: "0x5faf00"
     yellow: "0xf1c40f"

@@ -48,7 +48,7 @@ if has('nvim')
     Plug 'sindrets/diffview.nvim'
 
     " Used as light theme
-    Plug 'NLKNguyen/papercolor-theme'
+    Plug 'yorik1984/newpaper.nvim'
 endif
 
 
@@ -113,13 +113,21 @@ set background=dark
 
 if has('nvim')
     colorscheme gruvbox
+    " colorscheme industry
+
+    highlight Normal guibg=#080808
     highlight CursorLine guibg=NONE
     highlight CursorLineNr guibg=NONE guifg=ORANGE
     highlight Pmenu guibg=#222f3d guifg=#ecf0f1
     highlight PmenuSel guibg=#000000 guifg=#f1c40f 
-    highlight StatusLine guibg=#ecf0f1 guifg=#282828
-    highlight StatusLineNC guibg=#2c3e50 guifg=#282828
+    highlight StatusLine guibg=#ecf0f1 guifg=#080808
+    highlight StatusLineNC guibg=#2c3e50 guifg=#080808
     highlight Visual guibg=#fbf1c7 guifg=#d65d0e
+    highlight ColorColumn guibg=#111111
+
+    " highlight CursorLineNr guibg=NONE guifg=#cc241d
+    " highlight Visual guibg=RED guifg=#ecf0f1
+    " highlight TabLine guibg=#ffffff guifg=#2c3e50
 
     "lua require('lualine_style')
     lua require('git')
