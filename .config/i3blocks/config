@@ -6,6 +6,11 @@ command=curl -Ss 'https://wttr.in/Catania?0&T&Q' | cut -c 16- | head -2 | xargs 
 interval=3600
 color=#A4C2F4
 
+[cputemp]
+command=sensors | grep edge | cut -d '+' -f 2 | cut -d ' ' -f 1
+interval=10
+label=🌡️
+
 [memory]
 label=MEM
 separator=false
