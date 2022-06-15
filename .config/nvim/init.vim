@@ -8,7 +8,6 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'luochen1990/rainbow' " color parentheses
-"Plug 'terryma/vim-multiple-cursors'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
 Plug 'editorconfig/editorconfig-vim'
@@ -46,6 +45,8 @@ if has('nvim')
     Plug 'folke/lsp-colors.nvim'
 
     Plug 'sindrets/diffview.nvim'
+
+    Plug 'windwp/nvim-ts-autotag'
 
     " Used as light theme
     Plug 'yorik1984/newpaper.nvim'
@@ -113,23 +114,11 @@ set background=dark
 
 if has('nvim')
     colorscheme gruvbox
-    " colorscheme industry
-
-    highlight Normal guibg=#080808
-    highlight CursorLine guibg=NONE
-    highlight CursorLineNr guibg=NONE guifg=ORANGE
-    highlight Pmenu guibg=#222f3d guifg=#ecf0f1
-    highlight PmenuSel guibg=#000000 guifg=#f1c40f 
-    highlight StatusLine guibg=#ecf0f1 guifg=#080808
-    highlight StatusLineNC guibg=#2c3e50 guifg=#080808
-    highlight Visual guibg=#fbf1c7 guifg=#d65d0e
-    highlight ColorColumn guibg=#111111
 
     " highlight CursorLineNr guibg=NONE guifg=#cc241d
     " highlight Visual guibg=RED guifg=#ecf0f1
     " highlight TabLine guibg=#ffffff guifg=#2c3e50
 
-    "lua require('lualine_style')
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
     lua require('lsp_conf')
@@ -138,18 +127,6 @@ if has('nvim')
     lua require('todo-comments').setup()
     lua require('crates').setup()
 
-    " call wilder#setup({
-    "   \ 'modes': [':', '/', '?'],
-    "   \ })
-    " call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
-    "   \ 'highlights': {
-    "   \   'border': 'Normal',
-    "   \ },
-    "   \ 'border': 'rounded',
-    "   \ 'left': [
-    "   \   ' ', wilder#popupmenu_devicons(),
-    "   \ ],
-    "   \ })))
     lua require('nvim-treesitter.configs').setup({ highlight = { enable = true, }, })
 
     lua require('lsp-colors').setup()
@@ -161,24 +138,21 @@ if has('nvim')
     ca dc DiffviewClose
     ca dh DiffviewFileHistory
 
-    "   function! NvimGdbNoTKeymaps()
-    "     tnoremap <silent> <buffer> <esc> <c-\><c-n>
-    "   endfunction
-
-    "   let g:nvimgdb_config_override = {
-    "     \ 'key_next': 'n',
-    "     \ 'key_step': 's',
-    "     \ 'key_finish': 'f',
-    "     \ 'key_continue': 'c',
-    "     \ 'key_until': 'u',
-    "     \ 'key_breakpoint': 'b',
-    "     \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
-    "     \ }
-
     set cursorline " need for Neovim 0.6 for highlight CursorLineNr
 else
-    colorscheme industry
+    colorscheme gruvbox
 endif
+
+highlight Normal guibg=#080808
+highlight CursorLine guibg=NONE
+highlight CursorLineNr guibg=NONE guifg=ORANGE
+highlight Pmenu guibg=#222f3d guifg=#ecf0f1
+highlight PmenuSel guibg=#000000 guifg=#f1c40f 
+highlight StatusLine guibg=#ecf0f1 guifg=#080808
+highlight StatusLineNC guibg=#2c3e50 guifg=#080808
+highlight Visual guibg=#fbf1c7 guifg=#d65d0e
+highlight ColorColumn guibg=#111111
+
 
 " Figure out the system Python for Neovim.
 if exists("$VIRTUAL_ENV")
