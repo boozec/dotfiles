@@ -7,9 +7,8 @@ shell:
 font:
   size: 14
   normal:
-    # family: DejaVuSansMono
-    family: UbuntuMono
-    style: Nerd
+    family: FantasqueSansMono
+    style: Normal
 
 colors:
   primary:
