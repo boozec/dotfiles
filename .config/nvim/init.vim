@@ -1,6 +1,7 @@
 autocmd! bufwritepost .vimrc source %
 
 call plug#begin('~/.vim/plugged')
+
 Plug 'cespare/vim-toml', { 'branch': 'main' }
 Plug 'rust-lang/rust.vim'
 Plug 'nvim-lua/plenary.nvim'
@@ -25,7 +26,7 @@ Plug 'togglebyte/togglerust' " Debug Rust projects
 
 if has('nvim')
     Plug 'rktjmp/lush.nvim'
-    Plug 'ellisonleao/gruvbox.nvim'
+    Plug 'dcariotti/gruvbox.nvim'
 
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'neovim/nvim-lspconfig'
@@ -115,10 +116,6 @@ set background=dark
 if has('nvim')
     colorscheme gruvbox
 
-    " highlight CursorLineNr guibg=NONE guifg=#cc241d
-    " highlight Visual guibg=RED guifg=#ecf0f1
-    " highlight TabLine guibg=#ffffff guifg=#2c3e50
-
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
     lua require('lsp_conf')
@@ -142,17 +139,6 @@ if has('nvim')
 else
     colorscheme gruvbox
 endif
-
-highlight Normal guibg=#080808
-highlight CursorLine guibg=NONE
-highlight CursorLineNr guibg=NONE guifg=ORANGE
-highlight Pmenu guibg=#222f3d guifg=#ecf0f1
-highlight PmenuSel guibg=#000000 guifg=#f1c40f 
-highlight StatusLine guibg=#ecf0f1 guifg=#080808
-highlight StatusLineNC guibg=#2c3e50 guifg=#080808
-highlight Visual guibg=#fbf1c7 guifg=#d65d0e
-highlight ColorColumn guibg=#111111
-
 
 " Figure out the system Python for Neovim.
 if exists("$VIRTUAL_ENV")
