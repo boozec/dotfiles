@@ -28,48 +28,45 @@ null_ls.setup({
         null_ls.builtins.formatting.clang_format,
         -- JS/TS
         null_ls.builtins.formatting.prettier,
-    }
+    },
+    on_attach = function(client)
+        if client.resolved_capabilities.document_formatting then
+            vim.keymap.set('n', '<A-f>', '<cmd>lua vim.lsp.buf.formatting_sync(nil, 2000)<cr>', opts)
+            vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync(nil, 2000)"
+        end
+    end
 })
 
 -- Setup lspconfig. 
  
+require "lsp_signature".setup()
+
 --- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
+
+local common_on_attach = function(client, bufnr)
+    -- Mappings.
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+
+    lsp_status.on_attach(client)
+end
+
+
 local servers = { 'pyright', 'rust_analyzer', 'tsserver', 'clangd' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = coq.lsp_ensure_capabilities(),
-    on_attach = function(client, bufnr)
-      client.resolved_capabilities.document_formatting = false
-
-      require "lsp_signature".on_attach()
-
-      -- Mappings.
-      local opts = { noremap=true, silent=true }
-
-      -- See `:help vim.lsp.*` for documentation on any of the below functions
-      vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-      vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-      vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-      vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      vim.keymap.set('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    end,
+    on_attach = common_on_attach,
     flags = {
       debounce_text_changes = 150,
     }
   }
 end
 
--- nvim_lsp["null-ls"].setup({
---     on_attach = function(client)
---         if client.resolved_capabilities.document_formatting then
---             vim.keymap.set('n', '<A-f>', '<cmd>lua vim.lsp.buf.formatting_sync()<cr>', opts)
---             vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()"
---         end
---     end
--- })
---
---
 trouble.setup({
     use_diagnostic_signs = true,
     auto_close = true,
