@@ -23,7 +23,7 @@ require('gitsigns').setup {
     ['n hS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
     ['n hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
     ['n hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n hB'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+    ['n hB'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
   },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   --numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
