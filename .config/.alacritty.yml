@@ -1,13 +1,15 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator.
 shell:
   program: /usr/bin/tmux
   args:
-    - new-session
+    - new
 
 font:
-  size: 14
+  size: 7
   normal:
-    family: FantasqueSansMono
+    # family: DejaVuSansMono
+    # family: UbuntuMono
+    # style: Nerd
+    family: FiraMono
     style: Normal
 
 colors:
