@@ -120,7 +120,7 @@ if has('nvim')
     let g:coq_settings = { 'auto_start': v:true }
     lua require('lsp_conf')
 
-    lua require('nvim-tree').setup()
+    lua require('nvim-tree').setup({ actions = { open_file = { quit_on_open = true } } })
     lua require('todo-comments').setup()
     lua require('crates').setup()
 
@@ -159,8 +159,6 @@ set nocompatible
 set showcmd " show commands at bottom
 
 " nvim-tree
-let g:nvim_tree_quit_on_open = 1
-let g:nvim_tree_highlight_opened_files = 1
 nnoremap <C-t> :NvimTreeToggle<CR>
 
 " vim-move
