@@ -24,14 +24,22 @@ Plug 'matze/vim-move'
 
 Plug 'togglebyte/togglerust' " Debug Rust projects
 
+Plug 'chriskempson/base16-vim'
+
 if has('nvim')
-    Plug 'rktjmp/lush.nvim'
+    " Plug 'rktjmp/lush.nvim'
     Plug 'dcariotti/gruvbox.nvim'
 
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'neovim/nvim-lspconfig'
-    Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-    Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'L3MON4D3/LuaSnip'
+
+    " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+    " Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'ray-x/lsp_signature.nvim'
     Plug 'folke/todo-comments.nvim'
@@ -44,6 +52,7 @@ if has('nvim')
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
+
 
     Plug 'sindrets/diffview.nvim'
 
@@ -115,6 +124,9 @@ set background=dark
 
 if has('nvim')
     colorscheme gruvbox
+
+    " let base16colorspace=256
+    " colorscheme base16-irblack
 
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
