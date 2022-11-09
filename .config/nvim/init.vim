@@ -125,8 +125,14 @@ set background=dark
 if has('nvim')
     colorscheme gruvbox
 
-    " let base16colorspace=256
-    " colorscheme base16-irblack
+    let base16colorspace=256
+    colorscheme base16-irblack
+
+    highlight LineNr guibg=NONE
+    highlight CursorLine guibg=NONE
+    highlight CursorLineNr guibg=NONE guifg=YELLOW
+    highlight StatusLine guibg=#111111 guifg=YELLOW
+    highlight StatusLineNC guibg=NONE guifg=#dddddd
 
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
