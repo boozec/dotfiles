@@ -34,7 +34,7 @@ null_ls.setup({
         null_ls.builtins.formatting.prettier,
     },
     on_attach = function(client)
-        if client.resolved_capabilities.document_formatting then
+        if client.server_capabilities.document_formatting then
             vim.keymap.set('n', '<A-f>', '<cmd>lua vim.lsp.buf.formatting_sync(nil, 2000)<cr>', opts)
             vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync(nil, 2000)"
         end
