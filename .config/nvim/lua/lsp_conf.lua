@@ -19,7 +19,6 @@ local opts = { noremap=true, silent=true }
 
 null_ls.setup({
     debug = false,
-    save_after_format = false,
     sources = {
         -- Python
         null_ls.builtins.formatting.black,
@@ -33,12 +32,7 @@ null_ls.setup({
         -- JS/TS
         null_ls.builtins.formatting.prettier,
     },
-    on_attach = function(client)
-        if client.server_capabilities.document_formatting then
-            vim.keymap.set('n', '<A-f>', '<cmd>lua vim.lsp.buf.formatting_sync(nil, 2000)<cr>', opts)
-            vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync(nil, 2000)"
-        end
-    end
+    on_attach = common_on_attach
 })
 
 -- Setup lspconfig. 
@@ -56,6 +50,8 @@ local common_on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+    vim.keymap.set('n', '<A-f>', '<cmd>lua vim.lsp.buf.format {async = true}<cr>', opts)
+    vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.format {async = true}"
 
     -- lsp_status.on_attach(client)
 end
