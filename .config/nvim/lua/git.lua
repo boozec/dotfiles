@@ -10,6 +10,7 @@ require('gitsigns').setup {
     delete       = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     topdelete    = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    untracked    = {hl = 'GitSignsUntracked'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
   },
   keymaps = {
     -- Default keymap options
