@@ -6,18 +6,14 @@ Plug 'cespare/vim-toml', { 'branch': 'main' }
 Plug 'rust-lang/rust.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'luochen1990/rainbow' " color parentheses
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
-Plug 'editorconfig/editorconfig-vim'
 Plug 'ap/vim-css-color'
 Plug 'Yggdroot/indentLine'
 
 Plug 'google/vim-searchindex'
 
-Plug 'kazhala/close-buffers.nvim'
 Plug 'numToStr/Comment.nvim'
 
 Plug 'matze/vim-move'
@@ -26,10 +22,9 @@ Plug 'togglebyte/togglerust' " Debug Rust projects
 
 Plug 'chriskempson/base16-vim'
 
-if has('nvim')
-    " Plug 'rktjmp/lush.nvim'
-    Plug 'dcariotti/gruvbox.nvim'
+Plug 'editorconfig/editorconfig-vim'
 
+if has('nvim')
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'neovim/nvim-lspconfig'
 
@@ -38,25 +33,17 @@ if has('nvim')
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'L3MON4D3/LuaSnip'
 
-    " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-    " Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'ray-x/lsp_signature.nvim'
     Plug 'folke/todo-comments.nvim'
     Plug 'saecki/crates.nvim'
-    "Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-    "Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
 
-
     Plug 'sindrets/diffview.nvim'
-
-    Plug 'windwp/nvim-ts-autotag'
 
     " Used as light theme
     Plug 'yorik1984/newpaper.nvim'
@@ -75,7 +62,7 @@ set clipboard=unnamed
 set mouse=a " click with mouse
 set wildmenu
 set wildmode=full
-set wildignore=*~,*.png,*.jpg,*.gif,Thumbs.db,*.min.js,*.swp,*.o,vendor
+set wildignore=*~,*.png,*.jpg,*.gif,Thumbs.db,*.min.js,*.swp,*.o,vendor,*.pyc
 
 set number " number of the current line
 set relativenumber " relative number, ..-2 -1 x 1 2, where x is current line
@@ -93,7 +80,6 @@ set autoread
 
 set encoding=UTF-8
 set history=1000
-set wildignore+=*.pyc
 
 set hlsearch " highlight search
 set incsearch
@@ -113,18 +99,10 @@ set ttyfast
 
 set noswapfile
 
-" rust
-"   let g:rustfmt_autosave = 1
-"   let g:rustfmt_emit_files = 1
-"   let g:rustfmt_fail_silently = 0
-"   let g:rust_clip_command = 'xclip -selection clipboard'
-
 set termguicolors
 set background=dark
 
 if has('nvim')
-    colorscheme gruvbox
-
     let base16colorspace=256
     colorscheme base16-irblack
 
@@ -191,7 +169,6 @@ nnoremap j gj
 nnoremap k gk
 
 nnoremap tn :tabnew<cr>
-ca rt RainbowToggle
 
 nnoremap <leader>xx :TroubleToggle<cr>
 
@@ -217,7 +194,6 @@ nnoremap <leader>npa :set nopaste<CR>
 
 
 nmap <leader>cr :Cargo run<CR>
-nmap <F6> :EditorConfigReload<CR>
 
 if &diff
   "Get from remote
