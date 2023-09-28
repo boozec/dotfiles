@@ -1,35 +1,68 @@
 require('gitsigns').setup {
   signs = {
-    -- add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    -- change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    -- delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    -- topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    -- changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    untracked    = {hl = 'GitSignsUntracked'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-  },
-  keymaps = {
-    -- Default keymap options
-    noremap = true,
-
-    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-
-    ['n hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['v hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n hS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
-    ['n hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n hB'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
+    add          = { text = '+' },
+    change       = { text = '~' },
+    delete       = { text = '-' },
+    topdelete    = { text = '-' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
   },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-  --numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
   watch_gitdir = {
-    interval = 1000,
     follow_files = true
   },
+  attach_to_untracked = true,
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 1000,
+    ignore_whitespace = false,
+  },
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = 'single',
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', 'hs', gs.stage_hunk)
+    map('v', 'hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('n', 'hS', gs.stage_buffer)
+    map('n', 'hu', gs.undo_stage_hunk)
+    map('n', 'hp', gs.preview_hunk)
+    map('n', 'hB', gs.blame_line)
+  end
 }
