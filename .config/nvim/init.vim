@@ -104,6 +104,9 @@ set noswapfile
 set termguicolors
 set background=dark
 
+" copy with `y` to clipboard
+set clipboard+=unnamedplus
+
 if has('nvim')
     let base16colorspace=256
     "colorscheme base16-irblack

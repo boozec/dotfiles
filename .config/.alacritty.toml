@@ -1,0 +1,39 @@
+[colors.bright]
+black = "#6a6a6a"
+blue = "#ffaf00"
+cyan = "#00afaf"
+green = "#afd700"
+magenta = "#ffaf00"
+red = "#e74c3c"
+white = "#5f8787"
+yellow = "#f1c40f"
+
+[colors.cursor]
+cursor = "#808080"
+text = "#424242"
+
+[colors.normal]
+black = "#000000"
+blue = "#5fafd7"
+cyan = "#2ecc71"
+green = "#5faf00"
+magenta = "#808080"
+red = "#af005f"
+white = "#f2f2f2"
+yellow = "#f1c40f"
+
+[colors.primary]
+background = "#000000"
+foreground = "#c1c1c1"
+
+[font]
+size = 11.5
+
+[font.normal]
+family = "GitLabMono"
+style = "Regular"
+
+[shell]
+args = ["new"]
+program = "/usr/bin/tmux"
+# program = "/home/santo/.cargo/bin/zellij"
