@@ -3,17 +3,22 @@
 	email = santo@dcariotti.me
 	signingkey = C9B7C8FD3701C2C6
 [alias]
-	ci = commit
+	amend = commit --amend --verbose
+	ci = commit --verbose
 	co = checkout
-	logs =  log --graph --branches --remotes --tags --pretty=format':%C(yellow)%h%C(green)%d%Creset %s %C(yellow)|%Creset %C(cyan)%an <%ae> %C(yellow)| %C(white)%aD %C(red)(%ar)%Creset'
-	st = status
+	cp = cherry-pick
+	di = diff
+	dis = diff --staged
 	fd = "!f() { git log --grep=$1; }; f"
-	amend = commit --amend
+	logs =  log --graph --branches --remotes --tags --pretty=format':%C(yellow)%h%C(green)%d%Creset %C(cyan)%an <%ae> %Creset%C(white)%aD %C(red)(%ar)\n%s%Creset\n'
+	st = status
 [credential]
 	helper = store
 [core]
-	editor = nvim
-	pager = delta
+	editor = nvim --clean
+    ; pager = bat -l diff
+    ; pager = delta
+	excludesFile = ~/.gitignore
 [init]
 	defaultBranch = main
 [grep]
@@ -23,13 +28,20 @@
 	match = red bold
 	filename = cyan
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
-[interactive]
-	diffFilter = delta --color-only
-[delta]
-	features = side-by-side line-numbers decorations
+; [interactive]
+; 	diffFilter = delta --color-only
+; [delta]
+; 	features = line-numbers decorations
 [pull]
 	rebase = false
+[diff]
+	; external = difft
+    algorithm = histogram
+[safe]
+	directory = /home/santo/Documents/Notes
+[url "ssh://git@github.com"]
+	insteadOf = https://github.com

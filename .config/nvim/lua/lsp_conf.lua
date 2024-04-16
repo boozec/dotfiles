@@ -57,17 +57,17 @@ local common_on_attach = function(client, bufnr)
 end
 
 
-local servers = { 'pyright', 'rust_analyzer', 'tsserver', 'clangd' }
+local servers = { 'pyright', 'rust_analyzer', 'tsserver', 'clangd', 'gopls', 'ocamllsp' }
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.offsetEncoding = { "utf-16" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    capabilities = capabilities,
-    on_attach = common_on_attach,
-    flags = {
-      debounce_text_changes = 150,
+    nvim_lsp[lsp].setup {
+      capabilities = capabilities,
+      on_attach = common_on_attach,
+      flags = {
+        debounce_text_changes = 150,
+      }
     }
-  }
 end
 
 trouble.setup({

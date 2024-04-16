@@ -22,7 +22,7 @@ Plug 'togglebyte/togglerust' " Debug Rust projects
 
 Plug 'chriskempson/base16-vim'
 
-Plug 'editorconfig/editorconfig-vim'
+" Plug 'editorconfig/editorconfig-vim'
 
 if has('nvim')
     Plug 'nvim-telescope/telescope.nvim'
@@ -44,9 +44,6 @@ if has('nvim')
     Plug 'folke/lsp-colors.nvim'
 
     Plug 'sindrets/diffview.nvim'
-
-    " Used as light theme
-    Plug 'yorik1984/newpaper.nvim'
 endif
 
 
@@ -59,6 +56,11 @@ set runtimepath+=~/.vim-plugins/LanguageClient-neovim
 set completeopt=menu,menuone,noselect
 
 set clipboard=unnamed
+
+" copy with `y` to clipboard
+ca ce set clipboard+=unnamedplus
+ca cd set clipboard-=unnamedplus
+
 set mouse=a " click with mouse
 set wildmenu
 set wildmode=full
@@ -104,13 +106,19 @@ set background=dark
 
 if has('nvim')
     let base16colorspace=256
-    colorscheme base16-irblack
+    "colorscheme base16-irblack
+    colorscheme base16-gruvbox-dark-hard
 
+    highlight Normal guibg=NONE
     highlight LineNr guibg=NONE
     highlight CursorLine guibg=NONE
     highlight CursorLineNr guibg=NONE guifg=YELLOW
-    highlight StatusLine guibg=#111111 guifg=YELLOW
+    highlight StatusLine guibg=NONE guifg=YELLOW
     highlight StatusLineNC guibg=NONE guifg=#dddddd
+    highlight SignColumn guibg=NONE
+    highlight GitGutterChange guibg=NONE
+    highlight GitGutterAdd guibg=NONE
+    highlight GitGutterDelete guibg=NONE
 
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
@@ -130,6 +138,12 @@ if has('nvim')
     ca do DiffviewOpen
     ca dc DiffviewClose
     ca dh DiffviewFileHistory
+
+    " Launch gopls when Go files are in use
+    let g:LanguageClient_serverCommands = {
+           \ 'go': ['gopls']
+           \ }
+    " Run gofmt on save
 
     set cursorline " need for Neovim 0.6 for highlight CursorLineNr
 else
@@ -171,6 +185,7 @@ nnoremap k gk
 nnoremap tn :tabnew<cr>
 
 nnoremap <leader>xx :TroubleToggle<cr>
+nnoremap <leader>xf :TodoQuickFix<cr>
 
 " buffers
 nnoremap ]b :bnext<CR>

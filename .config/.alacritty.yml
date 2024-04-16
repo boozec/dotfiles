@@ -3,40 +3,43 @@ shell:
   args:
     - new
 
+
 font:
-  size: 7
+  size: 11.5
   normal:
+    # family: FiraMono
+    # style: Normal
     # family: DejaVuSansMono
     # family: UbuntuMono
     # style: Nerd
-    family: FiraMono
-    style: Normal
+    family: GitLabMono
+    style: Regular
 
 colors:
   primary:
-    background: "0x000000"
-    foreground: "0xc1c1c1"
+    background: "#000000"
+    foreground: "#c1c1c1"
 
   cursor:
-    text: "0x424242"
-    cursor: "0x808080"
+    text: "#424242"
+    cursor: "#808080"
 
   normal:
-    black: "0x080808"
-    red: "0xaf005f"
-    green: "0x5faf00"
-    yellow: "0xf1c40f"
-    blue: "0x5fafd7"
-    magenta: "0x808080"
-    cyan: "0x2ecc71"
-    white: "0xf2f2f2"
+    black: "#000000"
+    red: "#af005f"
+    green: "#5faf00"
+    yellow: "#f1c40f"
+    blue: "#5fafd7"
+    magenta: "#808080"
+    cyan: "#2ecc71"
+    white: "#f2f2f2"
 
   bright:
-    black: "0x6a6a6a"
-    red: "0xe74c3c"
-    green: "0xafd700"
-    yellow: "0xf1c40f"
-    blue: "0xffaf00"
-    magenta: "0xffaf00"
-    cyan: "0x00afaf"
-    white: "0x5f8787"
+    black: "#6a6a6a"
+    red: "#e74c3c"
+    green: "#afd700"
+    yellow: "#f1c40f"
+    blue: "#ffaf00"
+    magenta: "#ffaf00"
+    cyan: "#00afaf"
+    white: "#5f8787"
