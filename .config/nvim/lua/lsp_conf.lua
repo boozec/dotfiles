@@ -1,65 +1,42 @@
 local nvim_lsp = require('lspconfig')
--- local coq = require('coq')
---
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local null_ls = require("null-ls")
 local trouble = require("trouble")
 
--- Redefine sign.
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- Redefine LSP diagnostic signs
 local signs = { Error = 'E', Warning = 'W', Hint = 'H', Information = 'I' }
 
 for type, icon in pairs(signs) do
-  local hl = 'LspDiagnosticsSign' .. type
+  local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
 end
 
---local function vim.keymap.set(...) vim.api.nvim_vim.keymap.set(bufnr, ...) end
 local opts = { noremap=true, silent=true }
 
-null_ls.setup({
-    debug = false,
-    sources = {
-        -- Python
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.diagnostics.ruff,
-        -- null_ls.builtins.diagnostics.flake8,
-        -- Rust
-        null_ls.builtins.formatting.rustfmt,
-        -- C
-        null_ls.builtins.formatting.clang_format,
-        -- JS/TS
-        null_ls.builtins.formatting.prettier,
-    },
-    on_attach = common_on_attach
-})
-
--- Setup lspconfig. 
- 
+-- Setup lsp_signature for function signature help
 require "lsp_signature".setup()
 
---- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-
+-- Common on_attach function to handle keymaps and settings for all LSPs
 local common_on_attach = function(client, bufnr)
-    -- Mappings.
+    -- Key mappings
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+    -- Use vim.diagnostic.open_float for showing line diagnostics (replacing deprecated call)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     vim.keymap.set('n', '<A-f>', '<cmd>lua vim.lsp.buf.format {async = true}<cr>', opts)
-    vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.format {async = true}"
-
-    -- lsp_status.on_attach(client)
+    
+    -- Autoformat on save
+    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format {async = true}")
 end
 
+-- LSP servers setup
+local servers = { 'pyright', 'rust_analyzer', 'clangd', 'gopls', 'ocamllsp', 'jdtls' }
 
-local servers = { 'pyright', 'rust_analyzer', 'tsserver', 'clangd', 'gopls', 'ocamllsp' }
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.offsetEncoding = { "utf-16" }
+
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       capabilities = capabilities,
@@ -70,14 +47,21 @@ for _, lsp in ipairs(servers) do
     }
 end
 
+nvim_lsp.ts_ls.setup {
+  capabilities = capabilities,
+  on_attach = common_on_attach,
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  cmd = { "typescript-language-server", "--stdio" }
+}
+
+-- Trouble setup
 trouble.setup({
     use_diagnostic_signs = true,
     auto_close = true,
     auto_open = false
 })
 
-
--- nvim-cmp setup
+-- nvim-cmp setup for autocompletion
 local luasnip = require 'luasnip'
 local cmp = require 'cmp'
 cmp.setup {
