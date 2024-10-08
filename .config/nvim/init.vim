@@ -21,6 +21,7 @@ Plug 'matze/vim-move'
 Plug 'togglebyte/togglerust' " Debug Rust projects
 
 Plug 'chriskempson/base16-vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Plug 'editorconfig/editorconfig-vim'
 
@@ -39,7 +40,6 @@ if has('nvim')
     Plug 'saecki/crates.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-    Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
 
@@ -106,19 +106,21 @@ set background=dark
 
 if has('nvim')
     let base16colorspace=256
-    "colorscheme base16-irblack
-    colorscheme base16-gruvbox-dark-hard
-
+    " colorscheme base16-irblack
+    " colorscheme base16-gruvbox-dark-hard
+    colorscheme PaperColor
+    "
     highlight Normal guibg=NONE
+    highlight NonText guibg=NONE
     highlight LineNr guibg=NONE
     highlight CursorLine guibg=NONE
     highlight CursorLineNr guibg=NONE guifg=YELLOW
     highlight StatusLine guibg=NONE guifg=YELLOW
     highlight StatusLineNC guibg=NONE guifg=#dddddd
     highlight SignColumn guibg=NONE
-    highlight GitGutterChange guibg=NONE
-    highlight GitGutterAdd guibg=NONE
-    highlight GitGutterDelete guibg=NONE
+    " highlight GitGutterChange guibg=NONE
+    " highlight GitGutterAdd guibg=NONE
+    " highlight GitGutterDelete guibg=NONE
 
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
