@@ -13,7 +13,7 @@ cursor = "#808080"
 text = "#424242"
 
 [colors.normal]
-black = "#000000"
+black = "#333333"
 blue = "#5fafd7"
 cyan = "#2ecc71"
 green = "#5faf00"
@@ -24,7 +24,7 @@ yellow = "#f1c40f"
 
 [colors.primary]
 background = "#000000"
-foreground = "#c1c1c1"
+foreground = "#f1f1f1"
 
 # [colors.primary]
 # background= "#ffffff"
@@ -51,11 +51,11 @@ foreground = "#c1c1c1"
 # white= "#6e7781"
 
 [font]
-size = 11.5
+size = 12.5
 
 [font.normal]
-family = "GitLabMono"
-style = "Regular"
+family = "FiraCode"
+style = "Mono"
 
 [shell]
 args = ["new"]
