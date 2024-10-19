@@ -1,0 +1,206 @@
+-- Auto-reload Neovim configuration on save
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost init.lua source <afile> | PackerCompile
+  augroup end
+]]
+
+require('packer').startup(function(use)
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
+
+    use 'cespare/vim-toml'            -- TOML syntax highlighting
+    use 'rust-lang/rust.vim'          -- Rust language support
+    use 'nvim-lua/plenary.nvim'       -- Lua utilities for plugins
+    use 'lewis6991/gitsigns.nvim'     -- Git integration (show signs in gutter)
+    use 'kyazdani42/nvim-web-devicons'-- File icons
+    use 'mg979/vim-visual-multi'      -- Multi-cursor support
+    use 'tpope/vim-fugitive'          -- Git wrapper for commands like :Git
+    use 'ap/vim-css-color'            -- Show color preview for CSS colors
+    use 'Yggdroot/indentLine'         -- Display vertical indentation lines
+    use 'google/vim-searchindex'      -- Show search match count
+    use 'numToStr/Comment.nvim'       -- Easily comment/uncomment lines
+    use 'matze/vim-move'              -- Move lines up/down easily
+    use 'togglebyte/togglerust'       -- Rust debugging tools
+    -- use 'chriskempson/base16-vim'     -- Base16 color schemes
+    use 'NLKNguyen/papercolor-theme'  -- PaperColor theme
+    use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
+    use 'neovim/nvim-lspconfig'       -- LSP configuration for multiple languages
+    use 'hrsh7th/nvim-cmp'            -- Autocompletion engine
+    use 'hrsh7th/cmp-nvim-lsp'        -- LSP source for nvim-cmp
+    use 'saadparwaiz1/cmp_luasnip'    -- Snippet completion for nvim-cmp
+    use 'L3MON4D3/LuaSnip'            -- Snippet engine
+    use 'kyazdani42/nvim-tree.lua'    -- File explorer
+    use 'ray-x/lsp_signature.nvim'    -- Show function signatures as you type
+    use 'folke/todo-comments.nvim'    -- Highlight and search TODO comments
+    use 'saecki/crates.nvim'          -- Rust crate version management
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'             -- Update treesitter parsers
+    }
+    use 'folke/trouble.nvim'          -- Diagnostics and references list
+    use 'folke/lsp-colors.nvim'       -- Adds missing LSP diagnostics highlight groups
+    use 'sindrets/diffview.nvim'      -- Git diff and history viewer
+
+    -- Automatically set up the configuration after cloning packer.nvim
+    if packer_bootstrap then
+        require('packer').sync()
+    end
+end)
+
+-- General Neovim settings
+
+-- Configure completion options (menu, menuone, noselect)
+vim.opt.completeopt = "menu,menuone,noselect"
+
+-- Enable system clipboard access
+vim.opt.clipboard = "unnamedplus"
+
+-- Enable mouse support in all modes
+vim.opt.mouse = "a"
+
+-- Enable command-line completion features
+vim.opt.wildmenu = true
+vim.opt.wildmode = { "longest", "list", "full" }
+
+-- Ignore certain file types when using wildmenu for file navigation
+vim.opt.wildignore = "*.png,*.jpg,*.gif,*.swp,*.o,*.pyc,vendor"
+
+-- Show absolute line numbers
+vim.opt.number = true
+
+-- Show relative line numbers
+vim.opt.relativenumber = true 
+
+-- Set text width to 80 characters
+vim.opt.textwidth = 80 
+
+-- Highlight a column at 80 characters
+vim.opt.colorcolumn = "80"
+
+-- Disable line wrapping
+vim.opt.wrap = false
+
+-- Set tab width and shift width to 4 spaces
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+
+-- Use spaces instead of tabs
+vim.opt.expandtab = true
+
+-- Automatically indent new lines to match the previous line
+vim.opt.autoindent = true
+
+-- Automatically reload files if they are modified outside of Neovim
+vim.opt.autoread = true
+
+-- Set UTF-8 as the default encoding
+vim.opt.encoding = "UTF-8"
+
+-- Set the history size for command line and search
+vim.opt.history = 1000
+
+-- Highlight search matches
+vim.opt.hlsearch = true
+
+-- Incrementally search while typing
+vim.opt.incsearch = true
+
+-- Disable backup file creation
+vim.opt.backup = false
+
+-- Set the status line to always be visible
+vim.opt.laststatus = 2
+
+-- Show invisible characters (e.g., tabs, spaces, etc.)
+vim.opt.list = true
+
+-- Define characters for different invisible characters
+vim.opt.listchars = { eol = '⏎', tab = '»·', trail = 'ˑ', nbsp = '⎵' }
+
+-- Use indent-based folding
+vim.opt.foldmethod = "indent"
+
+-- Open vertical splits to the right of the current window
+vim.opt.splitright = true
+
+-- Open horizontal splits below the current window
+vim.opt.splitbelow = true
+
+-- Optimize screen redrawing for performance
+vim.opt.lazyredraw = true
+
+-- Disable swapfile creation
+vim.opt.swapfile = false
+
+-- Enable 24-bit RGB color in the terminal
+vim.opt.termguicolors = true
+
+-- Set background to dark mode
+vim.opt.background = "dark"
+
+-- Highlight the current line
+vim.opt.cursorline = true
+
+-- **Highlight settings**
+-- Set custom highlights for various UI components
+vim.cmd('colorscheme PaperColor')
+vim.cmd [[
+    highlight Normal guibg=#000000
+    highlight NonText guibg=#000000
+    highlight LineNr guibg=#000000
+    highlight CursorLine guibg=#000000
+    highlight CursorLineNr guibg=#000000 guifg=Yellow
+    highlight StatusLine guibg=#000000 guifg=Yellow
+    highlight StatusLineNC guibg=#000000 guifg=Yellow
+    highlight SignColumn guibg=#000000
+    highlight GitGutterChange guibg=#000000
+    highlight GitGutterAdd guibg=#000000
+    highlight GitGutterDelete guibg=#000000
+]]
+
+-- Keybindings
+vim.g.mapleader = ","  -- Set the leader key to ","
+vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true })  -- Move down visually wrapped lines
+vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true })  -- Move up visually wrapped lines
+
+---- Buffers
+vim.api.nvim_set_keymap('n', ']b', ':bnext<CR>', { noremap = true, silent = true }) -- Move to the next buffer
+vim.api.nvim_set_keymap('n', '[b', ':bprev<CR>', { noremap = true, silent = true }) -- Move to the previous buffer
+vim.api.nvim_set_keymap('n', '<leader>b', '<cmd>Telescope buffers<CR>', { noremap = true, silent = true }) -- List and switch to buffers using Telescope
+
+---- Tabs
+vim.api.nvim_set_keymap('n', 'tn', ':tabnew<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ']t', ':tabn<CR>', { noremap = true, silent = true }) -- Move to the next tab
+vim.api.nvim_set_keymap('n', '[t', ':tabp<CR>', { noremap = true, silent = true }) -- Move to the previous tab
+
+vim.api.nvim_set_keymap('n', '<leader>o', ':only<CR>', { noremap = true })  -- Close all other windows
+vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', { noremap = true })  -- Toggle NvimTree file explorer
+vim.api.nvim_set_keymap('n', '<leader>pa', ':set paste<CR>', { noremap = true })  -- Enable paste mode
+vim.api.nvim_set_keymap('n', '<leader>npa', ':set nopaste<CR>', { noremap = true })  -- Disable paste mode
+vim.api.nvim_set_keymap('n', '<leader>cr', ':Cargo run<CR>', { noremap = true })  -- Run `cargo run` for Rust projects
+vim.api.nvim_set_keymap('n', '<leader>xx', '<cmd>TroubleToggle<cr>', { noremap = true })  -- Toggle Trouble diagnostic window
+vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { noremap = true })  -- Find files with Telescope
+vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { noremap = true })  -- Live grep with Telescope
+vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { noremap = true })  -- Search help tags with Telescope
+
+-- Custom command aliases for Diffview
+vim.api.nvim_create_user_command('Do', 'DiffviewOpen', {})
+vim.api.nvim_create_user_command('Dc', 'DiffviewClose', {})
+vim.api.nvim_create_user_command('Dh', 'DiffviewFileHistory', {})
+
+
+-- Plugin configuration
+require('nvim-tree').setup { actions = { open_file = { quit_on_open = true } } }
+require('todo-comments').setup {}
+require('crates').setup {}
+require('nvim-treesitter.configs').setup { highlight = { enable = true } }
+require('lsp-colors').setup {}
+
+-- General settings
+require('git')  -- Load git-related settings
+require('lsp_conf')  -- Load LSP configuration
+
+-- Set up language client for Go
+vim.g.LanguageClient_serverCommands = { go = { 'gopls' } }
