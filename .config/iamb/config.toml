@@ -1,0 +1,14 @@
+default_profile = "deb"
+
+[profiles.deb]
+user_id = "@santo:matrix.debian.social"
+url = "https://matrix.debian.social"
+rooms = []
+
+[macros.normal]
+"gc" = ":chats<Enter>"
+"v" = "<C-w>m"
+"ZZ" = "<Esc>:q<Enter>"
+
+[settings.notifications]
+enabled = true
