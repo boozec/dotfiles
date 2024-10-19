@@ -1,31 +1,31 @@
 autocmd! bufwritepost .vimrc source %
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'cespare/vim-toml', { 'branch': 'main' }
-Plug 'rust-lang/rust.vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
-Plug 'ap/vim-css-color'
-Plug 'Yggdroot/indentLine'
-
-Plug 'google/vim-searchindex'
-
-Plug 'numToStr/Comment.nvim'
-
-Plug 'matze/vim-move'
-
-Plug 'togglebyte/togglerust' " Debug Rust projects
-
-Plug 'chriskempson/base16-vim'
-Plug 'NLKNguyen/papercolor-theme'
-
-" Plug 'editorconfig/editorconfig-vim'
-
 if has('nvim')
+    call plug#begin('~/.vim/plugged')
+
+    Plug 'cespare/vim-toml', { 'branch': 'main' }
+    Plug 'rust-lang/rust.vim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'lewis6991/gitsigns.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+    Plug 'tpope/vim-fugitive' " git extension for commit logs and etc.
+    Plug 'ap/vim-css-color'
+    Plug 'Yggdroot/indentLine'
+
+    Plug 'google/vim-searchindex'
+
+    Plug 'numToStr/Comment.nvim'
+
+    Plug 'matze/vim-move'
+
+    Plug 'togglebyte/togglerust' " Debug Rust projects
+
+    Plug 'chriskempson/base16-vim'
+    Plug 'NLKNguyen/papercolor-theme'
+
+    " Plug 'editorconfig/editorconfig-vim'
+
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'neovim/nvim-lspconfig'
 
@@ -44,12 +44,22 @@ if has('nvim')
     Plug 'folke/lsp-colors.nvim'
 
     Plug 'sindrets/diffview.nvim'
+
+
+    " indentline
+    let g:indentLine_char = '¦'
+    let g:vim_json_syntax_conceal = 0
+
+    let g:netrw_liststyle=1
+
+    " vim-move
+    let g:move_key_modifier = 'C'
+
+    call plug#end()            " required
+
+    syntax on
 endif
 
-
-call plug#end()            " required
-
-syntax on
 
 set runtimepath+=~/.vim-plugins/LanguageClient-neovim
 
@@ -109,7 +119,7 @@ if has('nvim')
     " colorscheme base16-irblack
     " colorscheme base16-gruvbox-dark-hard
     colorscheme PaperColor
-    "
+
     highlight Normal guibg=NONE
     highlight NonText guibg=NONE
     highlight LineNr guibg=NONE
@@ -118,9 +128,9 @@ if has('nvim')
     highlight StatusLine guibg=NONE guifg=YELLOW
     highlight StatusLineNC guibg=NONE guifg=#dddddd
     highlight SignColumn guibg=NONE
-    " highlight GitGutterChange guibg=NONE
-    " highlight GitGutterAdd guibg=NONE
-    " highlight GitGutterDelete guibg=NONE
+    highlight GitGutterChange guibg=NONE
+    highlight GitGutterAdd guibg=NONE
+    highlight GitGutterDelete guibg=NONE
 
     lua require('git')
     let g:coq_settings = { 'auto_start': v:true }
@@ -142,9 +152,7 @@ if has('nvim')
     ca dh DiffviewFileHistory
 
     " Launch gopls when Go files are in use
-    let g:LanguageClient_serverCommands = {
-           \ 'go': ['gopls']
-           \ }
+    let g:LanguageClient_serverCommands = { 'go': ['gopls'] }
     " Run gofmt on save
 
     set cursorline " need for Neovim 0.6 for highlight CursorLineNr
@@ -159,12 +167,6 @@ else
     let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
 endif
 
-" indentline
-let g:indentLine_char = '¦'
-let g:vim_json_syntax_conceal = 0
-
-let g:netrw_liststyle=1
-
 filetype plugin indent on
 set nocompatible
 
@@ -173,13 +175,12 @@ set showcmd " show commands at bottom
 " nvim-tree
 nnoremap <C-t> :NvimTreeToggle<CR>
 
-" vim-move
-let g:move_key_modifier = 'C'
-
 " ------------
 " MAPS
 " -----------
-let mapleader = ","
+if has('nvim')
+    let mapleader = ","
+endif
 
 nnoremap j gj
 nnoremap k gk
@@ -221,6 +222,8 @@ if &diff
   nnoremap dl :diffget<Space>LO<CR>
 endif
 
-packadd termdebug
-let g:termdebug_wide = 1
-let g:TermDebugging = 0
+if has('nvim')
+    packadd termdebug
+    let g:termdebug_wide = 1
+    let g:TermDebugging = 0
+endif
