@@ -1,0 +1,100 @@
+autocmd! bufwritepost .vimrc source %
+
+set completeopt=menu,menuone,noselect
+
+set clipboard=unnamed
+
+" copy with `y` to clipboard
+ca ce set clipboard+=unnamedplus
+ca cd set clipboard-=unnamedplus
+
+set mouse=a " click with mouse
+set wildmenu
+set wildmode=full
+set wildignore=*~,*.png,*.jpg,*.gif,Thumbs.db,*.min.js,*.swp,*.o,vendor,*.pyc
+
+set number " number of the current line
+set relativenumber " relative number, ..-2 -1 x 1 2, where x is current line
+set textwidth=80
+set colorcolumn=80
+set nowrap
+set fo-=t
+
+set tabstop=4
+set shiftwidth=4
+set expandtab " convert tabs in spaces
+
+set ai " auto indent
+set autoread
+
+set encoding=UTF-8
+set history=1000
+
+set hlsearch " highlight search
+set incsearch
+
+set nowritebackup
+set laststatus=2
+
+set list " spaces as characters
+set listchars=eol:⏎,tab:»·,trail:ˑ,nbsp:⎵
+
+set foldmethod=indent
+
+set splitright " split on right side
+set splitbelow
+set lazyredraw
+set ttyfast
+
+set noswapfile
+
+set termguicolors
+set background=dark
+
+" Figure out the system Python for Neovim.
+if exists("$VIRTUAL_ENV")
+    let g:python3_host_prog=substitute(system("which -a python3 | head -n2 | tail -n1"), "\n", '', 'g')
+else
+    let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
+endif
+
+filetype plugin indent on
+set nocompatible
+
+set showcmd " show commands at bottom
+
+" nvim-tree
+nnoremap <C-t> :NvimTreeToggle<CR>
+
+" ------------
+" MAPS
+" -----------
+nnoremap j gj
+nnoremap k gk
+
+nnoremap tn :tabnew<cr>
+
+" buffers
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
+
+" tabs
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
+
+" only one window
+nnoremap <leader>o :only<CR>
+
+
+nnoremap <leader>pa :set paste<CR>
+nnoremap <leader>npa :set nopaste<CR>
+
+
+if &diff
+  "Get from remote
+  nnoremap dr :diffget<Space>RE<CR>
+  "Get from base
+  nnoremap db :diffget<Space>BA<CR>
+  "Get from local
+  nnoremap dl :diffget<Space>LO<CR>
+endif
