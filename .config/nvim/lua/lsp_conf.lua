@@ -33,7 +33,7 @@ local common_on_attach = function(client, bufnr)
 end
 
 -- LSP servers setup
-local servers = { 'pyright', 'rust_analyzer', 'clangd', 'gopls', 'ocamllsp', 'jdtls' }
+local servers = { 'ruff_lsp', 'rust_analyzer', 'clangd', 'gopls', 'ocamllsp', 'jdtls', 'metals'}
 
 capabilities.offsetEncoding = { "utf-16" }
 
