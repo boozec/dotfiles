@@ -18,7 +18,7 @@ require('packer').startup(function(use)
     use 'mg979/vim-visual-multi'      -- Multi-cursor support
     use 'tpope/vim-fugitive'          -- Git wrapper for commands like :Git
     use 'ap/vim-css-color'            -- Show color preview for CSS colors
-    use 'Yggdroot/indentLine'         -- Display vertical indentation lines
+    use 'lukas-reineke/indent-blankline.nvim'         -- Display vertical indentation lines
     use 'google/vim-searchindex'      -- Show search match count
     use 'numToStr/Comment.nvim'       -- Easily comment/uncomment lines
     use 'matze/vim-move'              -- Move lines up/down easily
@@ -197,6 +197,8 @@ require('todo-comments').setup {}
 require('crates').setup {}
 require('nvim-treesitter.configs').setup { highlight = { enable = true } }
 require('lsp-colors').setup {}
+require("ibl").setup { indent = {char = "¦"} }
+vim.cmd.highlight('clear @ibl.scope.underline.1')
 
 -- General settings
 require('git')  -- Load git-related settings
