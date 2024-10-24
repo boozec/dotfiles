@@ -43,6 +43,11 @@ require('packer').startup(function(use)
     use 'folke/lsp-colors.nvim'       -- Adds missing LSP diagnostics highlight groups
     use 'sindrets/diffview.nvim'      -- Git diff and history viewer
 
+    use 'mfussenegger/nvim-dap'       -- Debug Adapter Protocol client implementation 
+    use 'leoluz/nvim-dap-go'          -- Neovim DAP extension for Go
+    -- use 'nvim-neotest/nvim-nio'
+    -- use 'rcarriga/nvim-dap-ui'
+
     -- Automatically set up the configuration after cloning packer.nvim
     if packer_bootstrap then
         require('packer').sync()
@@ -203,6 +208,7 @@ vim.cmd.highlight('clear @ibl.scope.underline.1')
 -- General settings
 require('git')  -- Load git-related settings
 require('lsp_conf')  -- Load LSP configuration
+require('test-dap')
 
 -- Set up language client for Go
 vim.g.LanguageClient_serverCommands = { go = { 'gopls' } }
