@@ -208,7 +208,7 @@ vim.cmd.highlight('clear @ibl.scope.underline.1')
 -- General settings
 require('git')  -- Load git-related settings
 require('lsp_conf')  -- Load LSP configuration
-require('test-dap')
+require('dap_conf')
 
 -- Set up language client for Go
 vim.g.LanguageClient_serverCommands = { go = { 'gopls' } }

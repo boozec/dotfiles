@@ -9,6 +9,28 @@ dap.listeners.before.launch.dapui_config = function()
  dapui.open()
 end
 
+dap.adapters.gdb = {
+  type = "executable",
+  command = "gdb",
+  args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+}
+
+local configurations = {'c', 'cpp', 'rust'}
+
+for _, conf in ipairs(configurations) do
+    dap.configurations[conf] = {
+      {
+        name = "Launch",
+        type = "gdb",
+        request = "launch",
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = "${workspaceFolder}",
+        stopAtBeginningOfMainSubprogram = false,
+      },
+    }
+end
 
 -- Include the next few lines until the comment only if you feel you need it
 dap.listeners.before.event_terminated.dapui_config = function()
