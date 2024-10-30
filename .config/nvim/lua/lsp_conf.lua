@@ -33,7 +33,15 @@ local common_on_attach = function(client, bufnr)
 end
 
 -- LSP servers setup
-local servers = { 'ruff_lsp', 'rust_analyzer', 'clangd', 'gopls', 'ocamllsp', 'jdtls', 'metals'}
+local servers = {
+    'clangd',
+    'gopls',
+    'jdtls',
+    'metals',
+    'ocamllsp',
+    'ruff_lsp',
+    'rust_analyzer',
+}
 
 capabilities.offsetEncoding = { "utf-16" }
 
@@ -53,6 +61,8 @@ nvim_lsp.ts_ls.setup {
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" }
 }
+
+vim.lsp.inlay_hint.enable(true, { 0 })
 
 -- Trouble setup
 trouble.setup({

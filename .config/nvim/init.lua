@@ -10,7 +10,7 @@ require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    use 'cespare/vim-toml'            -- TOML syntax highlighting
+    -- use 'cespare/vim-toml'            -- TOML syntax highlighting
     use 'rust-lang/rust.vim'          -- Rust language support
     use 'nvim-lua/plenary.nvim'       -- Lua utilities for plugins
     use 'lewis6991/gitsigns.nvim'     -- Git integration (show signs in gutter)
@@ -18,11 +18,10 @@ require('packer').startup(function(use)
     use 'mg979/vim-visual-multi'      -- Multi-cursor support
     use 'tpope/vim-fugitive'          -- Git wrapper for commands like :Git
     use 'ap/vim-css-color'            -- Show color preview for CSS colors
-    use 'lukas-reineke/indent-blankline.nvim'         -- Display vertical indentation lines
+    -- use 'lukas-reineke/indent-blankline.nvim'         -- Display vertical indentation lines
     use 'google/vim-searchindex'      -- Show search match count
     use 'numToStr/Comment.nvim'       -- Easily comment/uncomment lines
-    use 'matze/vim-move'              -- Move lines up/down easily
-    use 'togglebyte/togglerust'       -- Rust debugging tools
+    -- use 'togglebyte/togglerust'       -- Rust debugging tools
     -- use 'chriskempson/base16-vim'     -- Base16 color schemes
     use 'NLKNguyen/papercolor-theme'  -- PaperColor theme
     use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
@@ -45,8 +44,8 @@ require('packer').startup(function(use)
 
     use 'mfussenegger/nvim-dap'       -- Debug Adapter Protocol client implementation 
     use 'leoluz/nvim-dap-go'          -- Neovim DAP extension for Go
-    -- use 'nvim-neotest/nvim-nio'
-    -- use 'rcarriga/nvim-dap-ui'
+    use 'nvim-neotest/nvim-nio'
+    use 'rcarriga/nvim-dap-ui'
 
     -- Automatically set up the configuration after cloning packer.nvim
     if packer_bootstrap then
@@ -189,6 +188,7 @@ vim.api.nvim_set_keymap('n', '<leader>xx', '<cmd>TroubleToggle<cr>', { noremap =
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { noremap = true })  -- Find files with Telescope
 vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { noremap = true })  -- Live grep with Telescope
 vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { noremap = true })  -- Search help tags with Telescope
+vim.api.nvim_set_keymap('n', '<C-i>', ':lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>', { noremap = true })
 
 -- Custom command aliases for Diffview
 vim.api.nvim_create_user_command('Do', 'DiffviewOpen', {})
@@ -202,8 +202,8 @@ require('todo-comments').setup {}
 require('crates').setup {}
 require('nvim-treesitter.configs').setup { highlight = { enable = true } }
 require('lsp-colors').setup {}
-require("ibl").setup { indent = {char = "¦"} }
-vim.cmd.highlight('clear @ibl.scope.underline.1')
+-- require("ibl").setup { indent = {char = "¦"} }
+-- vim.cmd.highlight('clear @ibl.scope.underline.1')
 
 -- General settings
 require('git')  -- Load git-related settings
