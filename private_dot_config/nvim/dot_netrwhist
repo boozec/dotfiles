@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/var/www/html/riflessi/img/base'
+let g:netrw_dirhist_2='/var/www/html/riflessi/img'
+let g:netrw_dirhist_1='/var/www/html/riflessi/img/base'

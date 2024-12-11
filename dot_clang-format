@@ -1,0 +1,10 @@
+---
+AlwaysBreakAfterReturnType: All
+BasedOnStyle: Mozilla
+IndentWidth: 4
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+Standard: Cpp11
+TabWidth: 4
+AlwaysBreakAfterDefinitionReturnType: All
+AlignAfterOpenBracket: BlockIndent

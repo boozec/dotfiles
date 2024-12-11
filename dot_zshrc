@@ -1,0 +1,98 @@
+# now use Starship instead of oh-my-zsh theme
+export ZSH="/home/santo/.oh-my-zsh"
+# ZSH_THEME="pure"
+# ZSH_THEME="lukerandall"
+plugins=(
+ git
+ zsh-autosuggestions
+ zsh-syntax-highlighting
+ shrink-path
+ forgit
+ kubectl
+)
+
+source $ZSH/oh-my-zsh.sh
+
+eval "$(starship init zsh)"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#
+export PATH=$PATH:/home/santo/.local/bin/:/usr/local/go/bin:/home/santo/go/bin/
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export WORKON_HOME=$HOME/.virtualenvs
+# source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
+eval "$(direnv hook zsh)"
+eval "$(zoxide init zsh)"
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/.gems"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+
+# Java stuff
+export PATH=$PATH:/opt/gradle/gradle-7.4/bin
+
+# Scala
+export PATH="$PATH:/home/santo/.local/share/coursier/bin"
+
+alias mutt=neomutt
+alias gap="git add -p"
+alias cat="bat -p"
+alias ls=lsd
+# alias vim=nvim
+export TERM=xterm-256color
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+export PATH="$HOME/.poetry/bin:/usr/bin/jolie:$PATH"
+export JOLIE_HOME="/usr/lib/jolie"
+# export PATH="$HOME/.virtualenvs/cc/bin/path:$PATH"
+export DFT_DISPLAY=inline
+eval "$(atuin init zsh)"
+#eval `ssh-agent -s` > /dev/null
+xsetroot -solid "#080808"
+
+source "$HOME/.cargo/env"
+
+# fnm
+export PATH="/home/santo/.local/share/fnm:$PATH"
+eval "`fnm env`"
+
+# OCaml
+eval $(opam env)
+
+# Zig
+# export PATH="$PATH:/home/santo/Downloads/zig-linux-x86_64-0.12.0-dev.3381+7057bffc1"
+
+# jdtls
+export PATH="$PATH:/home/santo/Downloads/jdtls/bin"
+
+# Debian
+export DEBFULLNAME="Santo Cariotti"
+export DEBEMAIL="santo@dcariotti.me"
+
+
+# export BAT_THEME="gruvbox-light"
+export BAT_THEME="gruvbox-dark"
+
+# pnpm
+export PNPM_HOME="/home/santo/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+alias npm=pnpm
+# pnpm end
+
+# UV
+alias uvx="uv tool run"
+
+

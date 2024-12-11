@@ -14,7 +14,7 @@ set wildmode=full
 set wildignore=*~,*.png,*.jpg,*.gif,Thumbs.db,*.min.js,*.swp,*.o,vendor,*.pyc
 
 set number " number of the current line
-set relativenumber " relative number, ..-2 -1 x 1 2, where x is current line
+"set relativenumber " relative number, ..-2 -1 x 1 2, where x is current line
 set textwidth=80
 set colorcolumn=80
 set nowrap
@@ -36,8 +36,8 @@ set incsearch
 set nowritebackup
 set laststatus=2
 
-set list " spaces as characters
-set listchars=eol:⏎,tab:»·,trail:ˑ,nbsp:⎵
+"set list " spaces as characters
+"set listchars=eol:⏎,tab:»·,trail:ˑ,nbsp:⎵
 
 set foldmethod=indent
 

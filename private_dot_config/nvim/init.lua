@@ -47,6 +47,8 @@ require('packer').startup(function(use)
     use 'nvim-neotest/nvim-nio'
     use 'rcarriga/nvim-dap-ui'
 
+    use 'koraa/proverif.vim'
+
     -- Automatically set up the configuration after cloning packer.nvim
     if packer_bootstrap then
         require('packer').sync()
@@ -180,7 +182,7 @@ vim.api.nvim_set_keymap('n', ']t', ':tabn<CR>', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '[t', ':tabp<CR>', { noremap = true, silent = true }) -- Move to the previous tab
 
 vim.api.nvim_set_keymap('n', '<leader>o', ':only<CR>', { noremap = true })  -- Close all other windows
-vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', { noremap = true })  -- Toggle NvimTree file explorer
+vim.api.nvim_set_keymap('n', '<A-t>', ':NvimTreeToggle<CR>', { noremap = true })  -- Toggle NvimTree file explorer
 vim.api.nvim_set_keymap('n', '<leader>pa', ':set paste<CR>', { noremap = true })  -- Enable paste mode
 vim.api.nvim_set_keymap('n', '<leader>npa', ':set nopaste<CR>', { noremap = true })  -- Disable paste mode
 vim.api.nvim_set_keymap('n', '<leader>cr', ':Cargo run<CR>', { noremap = true })  -- Run `cargo run` for Rust projects

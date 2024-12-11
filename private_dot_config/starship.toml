@@ -1,0 +1,40 @@
+add_newline = false
+
+[character]
+success_symbol = '[\$](bold green)'
+error_symbol = '[\$](bold red)'
+
+[directory]
+truncation_length = 4
+style = "cyan"
+
+[line_break]
+disabled = true
+
+[custom.ssh_keys]
+disabled = true
+description = "SSH key count"
+when = "ssh-add -l | grep -v -q 'no identities'"
+command = "ssh-add -l | grep -v 'no identities' | wc -l"
+format = "$symbol[$output]($style) "
+shell = ["bash", "--noprofile", "--norc"]
+symbol = "🔑"
+style = "bold fg:green"
+
+[gcloud]
+disabled = true
+
+[username]
+style_user = 'fg:11 bold'
+style_root = 'cyan bold'
+format = '[$user]($style)'
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '[$ssh_symbol](bold blue)@[$hostname](bold red) '
+disabled = false
+
+[package]
+disabled = true

@@ -54,10 +54,10 @@ foreground = "#f1f1f1"
 size = 12.5
 
 [font.normal]
-family = "FiraCode"
-style = "Mono"
+family = "FiraCodeNerdFont"
+style = "Regular"
 
 [shell]
-args = ["new"]
-program = "/usr/bin/tmux"
-# program = "/home/santo/.cargo/bin/zellij"
+# args = ["new"]
+# program = "/usr/bin/tmux"
+program = "/usr/local/bin/zellij"
