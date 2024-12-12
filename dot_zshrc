@@ -95,4 +95,4 @@ alias npm=pnpm
 # UV
 alias uvx="uv tool run"
 
-
+alias fd="fdfind"
