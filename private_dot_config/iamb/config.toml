@@ -6,7 +6,7 @@ url = "https://matrix.debian.social"
 rooms = []
 
 [macros.normal]
-"gc" = ":chats<Enter>"
+"q" = ":chats<Enter>"
 "v" = "<C-w>m"
 "ZZ" = "<Esc>:q<Enter>"
 

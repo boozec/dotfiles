@@ -39,7 +39,7 @@ local servers = {
     'jdtls',
     'metals',
     'ocamllsp',
-    'ruff_lsp',
+    'ruff',
     'rust_analyzer',
 }
 
@@ -60,6 +60,21 @@ nvim_lsp.ts_ls.setup {
   on_attach = common_on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" }
+}
+
+nvim_lsp.pyright.setup {
+  settings = {
+    pyright = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
+  },
 }
 
 vim.lsp.inlay_hint.enable(true, { 0 })
