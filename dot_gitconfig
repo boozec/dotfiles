@@ -15,7 +15,7 @@
 [credential]
 	helper = store
 [core]
-	editor = nvim -u ~/.config/nvim/init_clean.vim
+	editor = nvim
     ; pager = bat -n --style=plain
     ; pager = delta
 	excludesFile = ~/.gitignore
