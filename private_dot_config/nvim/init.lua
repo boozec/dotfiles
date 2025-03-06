@@ -123,7 +123,18 @@ vim.opt.laststatus = 2
 vim.opt.list = true
 
 -- Define characters for different invisible characters
-vim.opt.listchars = { eol = '⏎', tab = '»·', trail = 'ˑ', nbsp = '⎵' }
+vim.opt.listchars = { eol = '⏎', tab = '» ', trail = 'ˑ', nbsp = '⎵' }
+vim.cmd([[match Error /.*\t$/]])
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "go", "c", "cpp" },
+  callback = function()
+    vim.opt.autoindent = true
+    vim.opt.expandtab = false
+    vim.opt.tabstop = 4
+    vim.opt.shiftwidth = 4
+  end,
+})
+
 
 -- Use indent-based folding
 vim.opt.foldmethod = "indent"
