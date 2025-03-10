@@ -24,6 +24,7 @@ require('packer').startup(function(use)
     -- use 'togglebyte/togglerust'       -- Rust debugging tools
     -- use 'chriskempson/base16-vim'     -- Base16 color schemes
     use 'NLKNguyen/papercolor-theme'  -- PaperColor theme
+    use 'projekt0n/github-nvim-theme'
     use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
     use 'neovim/nvim-lspconfig'       -- LSP configuration for multiple languages
     use 'hrsh7th/nvim-cmp'            -- Autocompletion engine
@@ -42,7 +43,7 @@ require('packer').startup(function(use)
     use 'folke/lsp-colors.nvim'       -- Adds missing LSP diagnostics highlight groups
     use 'sindrets/diffview.nvim'      -- Git diff and history viewer
 
-    use 'mfussenegger/nvim-dap'       -- Debug Adapter Protocol client implementation 
+    use 'mfussenegger/nvim-dap'       -- Debug Adapter Protocol client implementation
     use 'leoluz/nvim-dap-go'          -- Neovim DAP extension for Go
     use 'nvim-neotest/nvim-nio'
     use 'rcarriga/nvim-dap-ui'
@@ -77,10 +78,10 @@ vim.opt.wildignore = "*.png,*.jpg,*.gif,*.swp,*.o,*.pyc,vendor"
 vim.opt.number = true
 
 -- Show relative line numbers
-vim.opt.relativenumber = true 
+vim.opt.relativenumber = true
 
 -- Set text width to 80 characters
-vim.opt.textwidth = 80 
+vim.opt.textwidth = 80
 
 -- Highlight a column at 80 characters
 vim.opt.colorcolumn = "80"
@@ -125,6 +126,7 @@ vim.opt.list = true
 -- Define characters for different invisible characters
 vim.opt.listchars = { eol = '⏎', tab = '» ', trail = 'ˑ', nbsp = '⎵' }
 vim.cmd([[match Error /.*\t$/]])
+vim.cmd([[match Error /.*\s$/]])
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "go", "c", "cpp" },
   callback = function()
@@ -162,16 +164,18 @@ vim.opt.cursorline = true
 
 -- **Highlight settings**
 -- Set custom highlights for various UI components
-vim.cmd('colorscheme PaperColor')
+vim.cmd('colorscheme github_dark_default')
 vim.cmd [[
-    highlight Normal guibg=#000000
-    highlight NonText guibg=#000000
-    highlight LineNr guibg=#000000
-    highlight CursorLine guibg=#000000
-    highlight CursorLineNr guibg=#000000 guifg=Yellow
-    highlight StatusLine guibg=#000000 guifg=Yellow
-    highlight StatusLineNC guibg=#000000 guifg=Yellow
-    highlight SignColumn guibg=#000000
+    highlight Normal guibg=NONE
+    highlight NormalNC guibg=#111111
+    highlight NonText guibg=NONE
+    highlight LineNr guibg=NONE
+    highlight CursorLine guibg=NONE
+    highlight CursorLineNr guibg=NONE guifg=Yellow
+    highlight Error guibg=red guifg=#000000
+    "highlight StatusLine guibg=#000000 guifg=Yellow
+    "highlight StatusLineNC guibg=#000000 guifg=Yellow
+    highlight SignColumn guibg=NONE
     highlight GitGutterChange guibg=#000000
     highlight GitGutterAdd guibg=#000000
     highlight GitGutterDelete guibg=#000000

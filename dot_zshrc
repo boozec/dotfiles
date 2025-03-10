@@ -1,12 +1,12 @@
 # now use Starship instead of oh-my-zsh theme
 export ZSH="/home/santo/.oh-my-zsh"
 # ZSH_THEME="pure"
-# ZSH_THEME="lukerandall"
+# ZSH_THEME="dpoggi"
 plugins=(
  git
  zsh-autosuggestions
  zsh-syntax-highlighting
- shrink-path
+ # shrink-path
  forgit
  kubectl
 )
@@ -68,12 +68,6 @@ eval "`fnm env`"
 # OCaml
 eval $(opam env)
 
-# Zig
-# export PATH="$PATH:/home/santo/Downloads/zig-linux-x86_64-0.12.0-dev.3381+7057bffc1"
-
-# jdtls
-export PATH="$PATH:/home/santo/Downloads/jdtls/bin"
-
 # Debian
 export DEBFULLNAME="Santo Cariotti"
 export DEBEMAIL="santo@dcariotti.me"
@@ -101,3 +95,5 @@ alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 complete -F _quilt_completion -o filenames dquilt
 
 alias cz="chezmoi"
+
+# . "$HOME/.local/bin/env"
