@@ -4,12 +4,12 @@ local trouble = require("trouble")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Redefine LSP diagnostic signs
-local signs = { Error = 'E', Warning = 'W', Hint = 'H', Information = 'I' }
-
-for type, icon in pairs(signs) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-end
+-- local signs = { Error = 'E', Warning = 'W', Hint = 'H', Information = 'I' }
+--
+-- for type, icon in pairs(signs) do
+--   local hl = 'DiagnosticSign' .. type
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+-- end
 
 local opts = { noremap=true, silent=true }
 

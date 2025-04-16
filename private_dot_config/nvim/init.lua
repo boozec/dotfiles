@@ -50,6 +50,11 @@ require('packer').startup(function(use)
 
     use 'koraa/proverif.vim'
 
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
+
     -- Automatically set up the configuration after cloning packer.nvim
     if packer_bootstrap then
         require('packer').sync()
@@ -172,6 +177,7 @@ vim.cmd [[
     highlight LineNr guibg=NONE
     highlight CursorLine guibg=NONE
     highlight CursorLineNr guibg=NONE guifg=Yellow
+    highlight StatusLineNC guibg=#0d1117 guifg=#cacaca
     highlight Error guibg=red guifg=#000000
     "highlight StatusLine guibg=#000000 guifg=Yellow
     "highlight StatusLineNC guibg=#000000 guifg=Yellow
@@ -201,7 +207,7 @@ vim.api.nvim_set_keymap('n', '<A-t>', ':NvimTreeToggle<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>pa', ':set paste<CR>', { noremap = true })  -- Enable paste mode
 vim.api.nvim_set_keymap('n', '<leader>npa', ':set nopaste<CR>', { noremap = true })  -- Disable paste mode
 vim.api.nvim_set_keymap('n', '<leader>cr', ':Cargo run<CR>', { noremap = true })  -- Run `cargo run` for Rust projects
-vim.api.nvim_set_keymap('n', '<leader>xx', '<cmd>TroubleToggle<cr>', { noremap = true })  -- Toggle Trouble diagnostic window
+vim.api.nvim_set_keymap('n', '<space>d', '<cmd>Trouble diagnostics<cr>', { noremap = true })  -- Toggle Trouble diagnostic window
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { noremap = true })  -- Find files with Telescope
 vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { noremap = true })  -- Live grep with Telescope
 vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { noremap = true })  -- Search help tags with Telescope
@@ -219,13 +225,15 @@ require('todo-comments').setup {}
 require('crates').setup {}
 require('nvim-treesitter.configs').setup { highlight = { enable = true } }
 require('lsp-colors').setup {}
+require('Comment').setup()
 -- require("ibl").setup { indent = {char = "¦"} }
 -- vim.cmd.highlight('clear @ibl.scope.underline.1')
 
--- General settings
+-- General settings from ~/.config/nvim/lua/
 require('git')  -- Load git-related settings
 require('lsp_conf')  -- Load LSP configuration
 require('dap_conf')
+require('evil_lualine')
 
 -- Set up language client for Go
 vim.g.LanguageClient_serverCommands = { go = { 'gopls' } }
