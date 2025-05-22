@@ -80,10 +80,10 @@ vim.opt.wildmode = { "longest", "list", "full" }
 vim.opt.wildignore = "*.png,*.jpg,*.gif,*.swp,*.o,*.pyc,vendor"
 
 -- Show absolute line numbers
-vim.opt.number = true
+-- vim.opt.number = true
 
 -- Show relative line numbers
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 
 -- Set text width to 80 characters
 vim.opt.textwidth = 80
@@ -128,10 +128,11 @@ vim.opt.laststatus = 2
 -- Show invisible characters (e.g., tabs, spaces, etc.)
 vim.opt.list = true
 
+vim.opt.showmatch = true
+
 -- Define characters for different invisible characters
 vim.opt.listchars = { eol = '⏎', tab = '» ', trail = 'ˑ', nbsp = '⎵' }
-vim.cmd([[match Error /.*\t$/]])
-vim.cmd([[match Error /.*\s$/]])
+vim.cmd([[match Error /\s\+$/]])
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "go", "c", "cpp" },
   callback = function()

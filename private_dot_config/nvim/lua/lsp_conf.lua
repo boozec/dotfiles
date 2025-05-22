@@ -27,7 +27,7 @@ local common_on_attach = function(client, bufnr)
     -- Use vim.diagnostic.open_float for showing line diagnostics (replacing deprecated call)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     vim.keymap.set('n', '<A-f>', '<cmd>lua vim.lsp.buf.format {async = true}<cr>', opts)
-    
+
     -- Autoformat on save
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format {async = true}")
 end
@@ -41,6 +41,7 @@ local servers = {
     'ocamllsp',
     'ruff',
     'rust_analyzer',
+    -- 'hls',
 }
 
 capabilities.offsetEncoding = { "utf-16" }
@@ -62,20 +63,20 @@ nvim_lsp.ts_ls.setup {
   cmd = { "typescript-language-server", "--stdio" }
 }
 
-nvim_lsp.pyright.setup {
-  settings = {
-    pyright = {
-      -- Using Ruff's import organizer
-      disableOrganizeImports = true,
-    },
-    python = {
-      analysis = {
-        -- Ignore all files for analysis to exclusively use Ruff for linting
-        ignore = { '*' },
-      },
-    },
-  },
-}
+-- nvim_lsp.pyright.setup {
+--   settings = {
+--     pyright = {
+--       -- Using Ruff's import organizer
+--       disableOrganizeImports = true,
+--     },
+--     python = {
+--       analysis = {
+--         -- Ignore all files for analysis to exclusively use Ruff for linting
+--         ignore = { '*' },
+--       },
+--     },
+--   },
+-- }
 
 vim.lsp.inlay_hint.enable(true, { 0 })
 
