@@ -24,7 +24,8 @@ require('packer').startup(function(use)
     -- use 'togglebyte/togglerust'       -- Rust debugging tools
     -- use 'chriskempson/base16-vim'     -- Base16 color schemes
     use 'NLKNguyen/papercolor-theme'  -- PaperColor theme
-    use 'projekt0n/github-nvim-theme'
+    -- use 'projekt0n/github-nvim-theme'
+	use 'Shatur/neovim-ayu'
     use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
     use 'neovim/nvim-lspconfig'       -- LSP configuration for multiple languages
     use 'hrsh7th/nvim-cmp'            -- Autocompletion engine
@@ -170,10 +171,11 @@ vim.opt.cursorline = true
 
 -- **Highlight settings**
 -- Set custom highlights for various UI components
-vim.cmd('colorscheme github_dark_default')
+-- vim.cmd('colorscheme github_dark_default')
+vim.cmd('colorscheme ayu')
 vim.cmd [[
     highlight Normal guibg=NONE
-    highlight NormalNC guibg=#111111
+    " highlight NormalNC guibg=#111111
     highlight NonText guibg=NONE
     highlight LineNr guibg=NONE
     highlight CursorLine guibg=NONE
@@ -183,9 +185,9 @@ vim.cmd [[
     "highlight StatusLine guibg=#000000 guifg=Yellow
     "highlight StatusLineNC guibg=#000000 guifg=Yellow
     highlight SignColumn guibg=NONE
-    highlight GitGutterChange guibg=#000000
-    highlight GitGutterAdd guibg=#000000
-    highlight GitGutterDelete guibg=#000000
+    highlight GitGutterChange guifg=#f1c40f guibg=#000000
+    highlight GitGutterAdd guifg=#2ecc71 guibg=#000000
+    highlight GitGutterDelete guifg=#e74c3c guibg=#000000
 ]]
 
 -- Keybindings
