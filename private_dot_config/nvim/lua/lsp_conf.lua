@@ -39,7 +39,8 @@ local servers = {
     'jdtls',
     'metals',
     'ocamllsp',
-    'ruff',
+    -- 'ruff',
+    'pyright',
     'rust_analyzer',
     -- 'hls',
 }

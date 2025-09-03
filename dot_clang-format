@@ -1,6 +1,6 @@
 ---
 AlwaysBreakAfterReturnType: All
-BasedOnStyle: Mozilla
+BasedOnStyle: Google
 IndentWidth: 4
 IndentAccessModifiers: false
 AccessModifierOffset: -4

@@ -28,7 +28,7 @@ git_branch_name() {
 # Function to get git status symbols
 git_prompt_status() {
     local git_status=""
-    
+
     if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
         if [[ -n $(git ls-files --other --exclude-standard 2>/dev/null) ]]; then
             git_status+="${ZSH_THEME_GIT_PROMPT_UNTRACKED}"
@@ -86,7 +86,7 @@ get_path_info() {
         local git_root=$(git rev-parse --show-toplevel)
         local git_dirname=$(basename "$git_root")
         local path_within_repo="${PWD#$git_root}"
-        
+
         if [[ -z "$path_within_repo" ]]; then
             # We're in the git root directory
             echo "$git_dirname"
@@ -102,12 +102,12 @@ get_path_info() {
 
 # Basic prompt
 PROMPT='%{$fg_bold[black]%}[%*] '  # Show current time in HH:MM
-PROMPT+='%{$fg[yellow]%}%n%{$reset_color%}@%F{#D7005F}%m'
-if [[ "$PWD" != "$HOME" ]]; then
-    PROMPT+='%{$fg_bold[black]%}:%{$fg[yellow]%}$(get_path_info) '  # Dynamic path display
-fi
+PROMPT+='%{%F{#fbc531}%}%n%{$reset_color%}@%F{#D7005F}%m'
+# if [[ "$PWD" != "$HOME" ]]; then
+    PROMPT+='%{$fg_bold[black]%}:%{%F{#fbc531}%}$(get_path_info) '  # Dynamic path display
+# fi
 
 # Add git info to prompt
-PROMPT+='%F{#D7005F}$(git_prompt_info) '  # Git prompt with symbols
+PROMPT+='%F{#4cd137}$(git_prompt_info) '  # Git prompt with symbols
 PROMPT+='%{$fg[red]%}| '  # Pipe separator
 PROMPT+='%{$reset_color%}'  # Reset color

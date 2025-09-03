@@ -66,7 +66,7 @@ export PATH="/home/santo/.local/share/fnm:$PATH"
 eval "`fnm env`"
 
 # OCaml
-eval $(opam env)
+# eval $(opam env)
 
 # Debian
 export DEBFULLNAME="Santo Cariotti"
@@ -94,4 +94,12 @@ complete -F _quilt_completion -o filenames dquilt
 
 alias cz="chezmoi"
 
+alias vim="nvim"
+
+alias copy="xclip -selection clipboard"
+
 # . "$HOME/.local/bin/env"
+
+export BW_SESSION="OYyPlyzime+7Mm9G6hAAb/geL5iUi4+cERB8z7MNbkTKbXD1w/7e2fntVVYUiidKy5K4RS7o1P6BodBlA0Y+ig=="
+
+[ -f "/home/santo/.ghcup/env" ] && . "/home/santo/.ghcup/env" # ghcup-env

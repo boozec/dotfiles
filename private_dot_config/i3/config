@@ -4,7 +4,7 @@ set $mod Mod4
 font pango:Fantasque Sans Mono 11
 
 # Start a terminal
-bindsym $mod+Return exec alacritty --config-file ~/.alacrittyi3.yml
+bindsym $mod+Return exec alacritty --config-file ~/.alacritty.toml
 
 # Kill focused window
 bindsym $mod+Shift+q kill

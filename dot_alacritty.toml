@@ -54,7 +54,8 @@ foreground = "#f1f1f1"
 size = 12.5
 
 [font.normal]
-family = "FiraCodeNerdFont"
+# family = "Gitlab Mono"
+family = "Fira Code"
 style = "Regular"
 
 [shell]
