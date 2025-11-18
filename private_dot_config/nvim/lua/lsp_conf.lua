@@ -1,4 +1,3 @@
-local nvim_lsp = require('lspconfig')
 local trouble = require("trouble")
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -48,21 +47,26 @@ local servers = {
 capabilities.offsetEncoding = { "utf-16" }
 
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
+    vim.lsp.config(lsp, {
       capabilities = capabilities,
       on_attach = common_on_attach,
       flags = {
         debounce_text_changes = 150,
       }
-    }
+    })
 end
 
-nvim_lsp.ts_ls.setup {
+vim.lsp.config("ts_ls", {
   capabilities = capabilities,
   on_attach = common_on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" }
-}
+})
+
+
+for _, lsp in ipairs(servers) do
+    vim.lsp.enable(lsp)
+end
 
 -- nvim_lsp.pyright.setup {
 --   settings = {
@@ -125,7 +129,7 @@ cmp.setup {
     end, { 'i', 's' }),
   }),
   sources = {
-    { name = 'nvim_lsp' },
+    -- { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
 }
