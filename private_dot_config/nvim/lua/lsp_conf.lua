@@ -35,7 +35,7 @@ end
 local servers = {
     'clangd',
     'gopls',
-    'jdtls',
+    -- 'jdtls',
     'metals',
     'ocamllsp',
     -- 'ruff',
