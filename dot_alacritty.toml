@@ -51,11 +51,12 @@ foreground = "#f1f1f1"
 # white= "#6e7781"
 
 [font]
-size = 12.5
+size = 14
 
 [font.normal]
 # family = "Gitlab Mono"
-family = "Fira Code"
+# family = "Fira Code"
+family = "Iosevka"
 style = "Regular"
 
 [shell]
